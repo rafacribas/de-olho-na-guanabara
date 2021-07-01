@@ -15,17 +15,17 @@
 
     <v-main>
       
-      <Mapa />
+      <MapaWrapper />
       
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Mapa from './components/Mapa.vue'
+import MapaWrapper from './components/MapaWrapper.vue'
   export default {
     components : {
-      Mapa
+      MapaWrapper
     },
     data: () => ({ drawer: null }),
   }
