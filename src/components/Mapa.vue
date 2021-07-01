@@ -1,11 +1,11 @@
 <template>
-    <v-container fluid>          
+    <v-container class="pa-0" fluid style="height:100%">          
         <MglMap class="mapa" :accessToken="accessToken" :mapStyle="mapStyle" :zoom="zoom" >
             <MglMarker :coordinates="coordinates" color="blue" />            
              <MglGeolocateControl :positionOptions="positionOptions" trackUserLocation position="top-right" />
              <MglMarker :coordinates="coordinates2" color="blue" />
         </MglMap>
-        <div class="d-flex justify-center mt-2">
+        <div class="d-flex justify-center mt-2" style="position:relative;bottom:90px">
             <v-btn
                 bottom
                 x-large
@@ -61,6 +61,6 @@ export default {
 <style scoped>
 
 .mapa{
-    height: 75vh;
+    height:100%;
 }
 </style>
