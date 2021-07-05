@@ -7,7 +7,7 @@
 <script>
 
 export default {
-  name: 'HomeView',
+  name: 'CampoView',
 }
 </script>
 <style scoped>
