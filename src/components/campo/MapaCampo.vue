@@ -4,7 +4,7 @@
       <MglMap  class="mapa" :accessToken="accessToken" @load="onMapLoad" :mapStyle="mapStyle" :center="center" :zoom="zoom" > 
           <MglGeolocateControl :positionOptions="positionOptions" trackUserLocation position="top-right" />
       </MglMap>
-      <div class="d-flex justify-center mt-2" style="position:relative;bottom:90px">
+      <div class="d-flex justify-center mt-2" style="position:relative;bottom:130px">
           <v-btn            
               bottom
               to="/add"
