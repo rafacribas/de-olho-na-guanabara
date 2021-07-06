@@ -1,15 +1,15 @@
 <template>
   <v-container style="height:100%" fluid>    
         <v-container class="snapshot-mapa pa-0">
-            <MglMap class="mapa" :center="centeredLoc" :accessToken="accessToken" :mapStyle="mapStyle" :zoom="zoom"  @load="onMapLoad" >                      
-                <MglMarker :coordinates="centeredLoc" color="blue" />
+            <MglMap class="mapa" :center="center" :accessToken="accessToken" :mapStyle="mapStyle" :zoom="zoom"  @load="onMapLoad" >                      
+                <MglMarker :coordinates="coordCampo" color="blue" />
             </MglMap>
         </v-container>    
         <v-container>         
             <v-row>
                 <v-col>
                     <v-select 
-                        outlined                         
+                        outlined
                         color="blue"
                         label="Impacto"
                         :items="impactos"
@@ -19,7 +19,9 @@
             </v-row>
             <v-row>
                 <v-col cols="12">
+                    {{file}}
                     <v-file-input
+                        v-model="file"
                         truncate-length="15"
                         chips
                         outlined
@@ -53,10 +55,7 @@ export default {
     components: {
         MglMap,
         MglMarker    
-    },    
-    mounted(){          
-        this.goTo()
-    },
+    },        
     computed:{
         centeredLoc(){
             let x = [];
@@ -71,13 +70,10 @@ export default {
         }
     },
     methods:{
-        goTo(){
- 
-        },
         async create(){         
             const formData = new FormData();
             formData.append("data", `{ "lat": "123", "lng": "123" }`);
-
+            formData.append("files.photo", this.file);
             await axios.post("https://guanabara-backend.herokuapp.com/location-points", formData).then(res => {
                 console.log(res);
                 console.log(res.data);
@@ -91,8 +87,14 @@ export default {
             // axios.post('https://guanabara-backend.herokuapp.com/location-point', obj)
             this.goTo();
         },
-        async onMapLoad() {
-            
+        async onMapLoad(event) {
+            const asyncActions = event.component.actions;            
+            const newParams = await asyncActions.flyTo({
+            center: this.centeredLoc,
+            zoom: 9,
+            speed: 1
+            }) 
+            console.log(newParams)
         }
 
     },
@@ -100,8 +102,9 @@ export default {
         return {
             accessToken: 'pk.eyJ1IjoiaGVucmlxdWUtbm9mdiIsImEiOiJja282YnM5MmswajFiMnBxbzkxNmNoeWR6In0.prYdkvzL5DuxvRKEYydGiQ',
             mapStyle: 'mapbox://styles/mapbox/outdoors-v11',
-            center:  [-21.870,-42.749668],
-            zoom: 12,
+            center: [-43.1551208,-22.8855783],
+            zoom: 5,
+            file: null,
             coordinatesMarker: [-42.749668, -21.870],
             coordCampo:[1,1],
             impactos:[
