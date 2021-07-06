@@ -19,7 +19,6 @@
             </v-row>
             <v-row>
                 <v-col cols="12">
-                    {{file}}
                     <v-file-input
                         v-model="file"
                         truncate-length="15"
