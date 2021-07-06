@@ -73,6 +73,6 @@ export default {
 <style scoped>
 
 .mapa{
-    height:100%;
+    height:97%;
 }
 </style>
