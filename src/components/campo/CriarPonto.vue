@@ -1,75 +1,116 @@
 <template>
   <v-container style="height:100%" fluid>    
-    
-        <v-container>
-            <v-row>
-                <v-col>
-                    
-                    <v-text-field
-                    outlined             
-                     hide-details
-                    color="primary"
-                    label="Nome"
-                    />
-                
-                </v-col>
-            </v-row>
+        <v-container class="snapshot-mapa pa-0">
+            <MglMap class="mapa" :center="centeredLoc" :accessToken="accessToken" :mapStyle="mapStyle" :zoom="zoom"  @load="onMapLoad" >                      
+                <MglMarker :coordinates="centeredLoc" color="blue" />
+            </MglMap>
+        </v-container>    
+        <v-container>         
             <v-row>
                 <v-col>
                     <v-select 
                         outlined                         
                         color="blue"
                         label="Impacto"
+                        :items="impactos"
                         hide-details
                     />
                 </v-col>
             </v-row>
             <v-row>
-                <v-col cols="8">
+                <v-col cols="12">
                     <v-file-input
                         truncate-length="15"
                         chips
                         outlined
                         hide-details
-                        label="Foto"                        
-                        prepend-icon="mdi-camera"
+                        label="Foto"
+                        capture="user"
+                        accept="image/*"
+                        append-icon="mdi-camera"
+                        prepend-icon=""
                         ></v-file-input>
-                    </v-col>
-                    <v-col cols="2" justify="center">
-                        <v-btn color="green" x-large>
-                            <v-icon color="white">                            
-                                mdi-check-circle-outline
-                            </v-icon>
-                        </v-btn>
-                    </v-col>
+                </v-col>
+                <v-col cols="12" justify="center">
+                    <v-btn @click="create" color="green" x-large style="width: 100%">
+                        <span style="color: white">
+                            CONFIRMAR
+                        </span>
+                    </v-btn>
+                </v-col>
             </v-row>
         </v-container>
-        <v-container class="snapshot-mapa pa-0">
-            <MglMap class="mapa" :center="center" :accessToken="accessToken" :mapStyle="mapStyle" :zoom="zoom" >                      
-                <MglMarker :coordinates="coordinatesMarker" color="blue" />
-            </MglMap>
-        </v-container>
-        
   </v-container>
 </template>
 
 <script>
 import { MglMap, MglMarker } from "vue-mapbox";
+import axios from 'axios'
+
 
 export default {
     name: 'CriarPonto',
     components: {
         MglMap,
         MglMarker    
+    },    
+    mounted(){          
+        this.goTo()
+    },
+    computed:{
+        centeredLoc(){
+            let x = [];
+    
+            navigator.geolocation.getCurrentPosition((data) => {
+                console.log(data)
+                x[0] = data.coords.longitude;
+                x[1] = data.coords.latitude;        
+            });
+        
+            return x
+        }
+    },
+    methods:{
+        goTo(){
+ 
+        },
+        async create(){         
+            const formData = new FormData();
+            formData.append("data", `{ "lat": "123", "lng": "123" }`);
+
+            await axios.post("https://guanabara-backend.herokuapp.com/location-points", formData).then(res => {
+                console.log(res);
+                console.log(res.data);
+            });
+
+            // let obj = {
+            //     long: this.coordCampo[0],
+            //     lat: this.coordCampo[1]
+            // }
+
+            // axios.post('https://guanabara-backend.herokuapp.com/location-point', obj)
+            this.goTo();
+        },
+        async onMapLoad() {
+            
+        }
+
     },
     data(){
         return {
             accessToken: 'pk.eyJ1IjoiaGVucmlxdWUtbm9mdiIsImEiOiJja282YnM5MmswajFiMnBxbzkxNmNoeWR6In0.prYdkvzL5DuxvRKEYydGiQ',
             mapStyle: 'mapbox://styles/mapbox/outdoors-v11',
-            center: [-42.749668, -21.870],
-            zoom: 15,
-            coordinatesMarker: [-42.749668, -21.870]
-
+            center:  [-21.870,-42.749668],
+            zoom: 12,
+            coordinatesMarker: [-42.749668, -21.870],
+            coordCampo:[1,1],
+            impactos:[
+                'Demarcação de áreas de exploração e tráfego',
+                'Incremento do fluxo de embarcações na região',
+                'Levantamentos geofísicos preliminares',
+                'Alterações na dinâmica geoeconômica das áreas terrestres adjacentes',
+                'Perfuração de poços'                
+            ]
         }
     }
 
