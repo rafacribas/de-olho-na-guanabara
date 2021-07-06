@@ -1,14 +1,13 @@
 <template>
     <v-container class="pa-0" fluid style="height:100%">      
-      <!-- criar ponto -->
       <router-view style="height:100%"/>
-      <MglMap class="mapa" :accessToken="accessToken" :mapStyle="mapStyle" :center="center" :zoom="zoom" > 
+      <MglMap  class="mapa" :accessToken="accessToken" @load="onMapLoad" :mapStyle="mapStyle" :center="center" :zoom="zoom" > 
           <MglGeolocateControl :positionOptions="positionOptions" trackUserLocation position="top-right" />
       </MglMap>
       <div class="d-flex justify-center mt-2" style="position:relative;bottom:90px">
           <v-btn            
               bottom
-              to="add"
+              to="/add"
               @click="getUserLocation()"
               x-large
               elevation="2"
@@ -38,15 +37,23 @@ export default {
     return {
       accessToken: 'pk.eyJ1IjoiaGVucmlxdWUtbm9mdiIsImEiOiJja282YnM5MmswajFiMnBxbzkxNmNoeWR6In0.prYdkvzL5DuxvRKEYydGiQ',
       mapStyle: 'mapbox://styles/mapbox/outdoors-v11',
-      coordinates:  [-42.749668, -21.870],
-      zoom: 2,
-      coordinates2 : [0,0],
+      zoom: 20,
       positionOptions: { enableHighAccuracy: true, timeout: 6000},
-      center: [-43.1551208,-22.8004402],
-      coordCampo: []
+      coordCampo: [],
+      center: [0, 0] 
     };
   },
   methods:{
+    async onMapLoad(event) {
+        const asyncActions = event.component.actions;
+        navigator.geolocation.getCurrentPosition((data) => {
+            asyncActions.flyTo({
+                center: [data.coords.longitude, data.coords.latitude],
+                zoom: 13,
+                speed: 1
+            }) 
+        })
+    },
     getUserLocation(){
           if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition((data) => {
@@ -56,7 +63,6 @@ export default {
               });
           }
     }
-
   },
   created() {
     // We need to set mapbox-gl library here in order to use it in template

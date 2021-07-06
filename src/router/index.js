@@ -17,7 +17,7 @@ const routes = [
     component: () =>import( '@/components/campo/MapaCampo.vue')
   },
   {  
-    path: '/campo/add',
+    path: '/add',
     name: 'Criar Ponto',    
     component: () => import( '@/components/campo/CriarPonto.vue'),
   }

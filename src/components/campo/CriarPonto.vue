@@ -1,8 +1,14 @@
 <template>
-  <v-container style="height:100%" fluid>    
+  <v-container style="height:100%" fluid>
+        <v-snackbar
+            v-model="snackbar"
+            :timeout="timeout"
+            >
+            {{ text }}
+        </v-snackbar>
         <v-container class="snapshot-mapa pa-0">
-            <MglMap class="mapa" :center="center" :accessToken="accessToken" :mapStyle="mapStyle" :zoom="zoom"  @load="onMapLoad" >                      
-                <MglMarker :coordinates="coordCampo" color="blue" />
+            <MglMap class="mapa" :accessToken="accessToken" :mapStyle="mapStyle" :zoom="zoom"  @load="onMapLoad" >                      
+                <MglMarker :coordinates="coordinatesMarker" color="blue" />
             </MglMap>
         </v-container>    
         <v-container>         
@@ -60,7 +66,6 @@ export default {
             let x = [];
     
             navigator.geolocation.getCurrentPosition((data) => {
-                console.log(data)
                 x[0] = data.coords.longitude;
                 x[1] = data.coords.latitude;        
             });
@@ -69,31 +74,48 @@ export default {
         }
     },
     methods:{
-        async create(){         
-            const formData = new FormData();
-            formData.append("data", `{ "lat": "123", "lng": "123" }`);
-            formData.append("files.photo", this.file);
-            await axios.post("https://guanabara-backend.herokuapp.com/location-points", formData).then(res => {
-                console.log(res);
-                console.log(res.data);
+        async centeredLoc2(){
+            let x = [];
+    
+            await navigator.geolocation.getCurrentPosition((data) => {
+                x[0] = data.coords.longitude;
+                x[1] = data.coords.latitude;        
             });
-
-            // let obj = {
-            //     long: this.coordCampo[0],
-            //     lat: this.coordCampo[1]
-            // }
-
-            // axios.post('https://guanabara-backend.herokuapp.com/location-point', obj)
-            this.goTo();
+        
+            return x
         },
+        create(){         
+            const formData = new FormData();
+            let lng;
+            let lat;
+            navigator.geolocation.getCurrentPosition(async (data) => {
+                console.log('DATA', data)
+                lng = data.coords.longitude;
+                lat = data.coords.latitude; 
+
+                formData.append("data", `{ "lat": "${lat}", "lng": "${lng}" }`);
+                formData.append("files.photo", this.file);
+
+                await axios.post("https://guanabara-backend.herokuapp.com/location-points", formData).then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                });       
+
+                this.snackbar = true;
+                setTimeout(()=>this.$router.push('/'), 1500)
+            });
+            
+        },         
         async onMapLoad(event) {
-            const asyncActions = event.component.actions;            
-            const newParams = await asyncActions.flyTo({
-            center: this.centeredLoc,
-            zoom: 9,
-            speed: 1
-            }) 
-            console.log(newParams)
+            console.log('nMAP LOADED')
+            const asyncActions = event.component.actions;
+            navigator.geolocation.getCurrentPosition((data) => {
+                asyncActions.flyTo({
+                    center: [data.coords.longitude, data.coords.latitude],
+                    zoom: 13,
+                    speed: 1
+                }) 
+            })
         }
 
     },
@@ -105,7 +127,9 @@ export default {
             zoom: 5,
             file: null,
             coordinatesMarker: [-42.749668, -21.870],
-            coordCampo:[1,1],
+            snackbar: false,
+            text: 'Ponto cadastrado.',
+            timeout: 2000,
             impactos:[
                 'Demarcação de áreas de exploração e tráfego',
                 'Incremento do fluxo de embarcações na região',
