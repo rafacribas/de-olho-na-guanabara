@@ -59,7 +59,8 @@
                         ></v-file-input>
                 </v-col>
                 <v-col cols="12" justify="center">
-                    <v-btn  :loading="isLoading" :disabled="isLoading" @click="isEdit ? update : create" color="primary" x-large style="width: 100%">
+                    {{isEdit.length}}
+                    <v-btn  :loading="isLoading" :disabled="isLoading" @click="isEdit.length ? update() : create()" color="primary" x-large style="width: 100%">
                         <span style="color: white">
                             {{ isEdit ? 'ATUALIZAR' : 'CADASTRAR' }}
                         </span>
@@ -234,6 +235,7 @@ export default {
             return x
         },
         create(){         
+            console.log('chamei')
             this.isLoading = true;
             const formData = new FormData();
             let lng;
