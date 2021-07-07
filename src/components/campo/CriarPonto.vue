@@ -83,7 +83,7 @@ export default {
     },        
     computed:{
         isEdit() {
-            return this.$route.params.id
+            return this.$route?.params?.id || ''
         },
         getImpactos(){
             switch (this.atividadeSelecionada) {
