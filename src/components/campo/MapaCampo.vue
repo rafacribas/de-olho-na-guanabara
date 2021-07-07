@@ -46,7 +46,7 @@ export default {
       zoom: 20,
       positionOptions: { enableHighAccuracy: true, timeout: 6000},
       coordCampo: [],
-      center: [0, 0],
+      center: [-49.251109,-25.4521746],
       markers: []
     };
   },
