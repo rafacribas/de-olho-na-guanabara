@@ -59,7 +59,6 @@
                         ></v-file-input>
                 </v-col>
                 <v-col cols="12" justify="center">
-                    {{isEdit.length}}
                     <v-btn  :loading="isLoading" :disabled="isLoading" @click="isEdit.length ? update() : create()" color="primary" x-large style="width: 100%">
                         <span style="color: white">
                             {{ isEdit ? 'ATUALIZAR' : 'CADASTRAR' }}
