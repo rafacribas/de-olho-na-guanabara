@@ -8,8 +8,9 @@
         <v-list-item-content>
           <v-list-item-title class="text-h6">
             <v-icon>
-              mdi-check
+              mdi-eye
             </v-icon>
+            <span class="ml-7 subtitle-1">Guanabara</span>
           </v-list-item-title>
 
         </v-list-item-content>
@@ -58,9 +59,9 @@
      return{
        drawer:null,
         items: [
-        { title: 'Mapa', icon: 'mdi-image', link: '/' },
-        { title: 'Campo', icon: 'mdi-view-dashboard', link: '/campo/' },
-        { title: 'Meus Pontos', icon: 'mdi-help-box',link: '/meusPontos' },
+        { title: 'Mapa', icon: 'mdi-map', link: '/' },
+        { title: 'Adicionar Ponto', icon: 'mdi-map-marker-plus-outline', link: '/campo/' },
+        { title: 'Meus Pontos', icon: 'mdi-map-search',link: '/meusPontos' },
       ] 
      }
    }
