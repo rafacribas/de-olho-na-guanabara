@@ -59,9 +59,9 @@
                         ></v-file-input>
                 </v-col>
                 <v-col cols="12" justify="center">
-                    <v-btn  :loading="isLoading" :disabled="isLoading" @click="create" color="primary" x-large style="width: 100%">
+                    <v-btn  :loading="isLoading" :disabled="isLoading" @click="isEdit ? update : create" color="primary" x-large style="width: 100%">
                         <span style="color: white">
-                            CONFIRMAR
+                            {{ isEdit ? 'ATUALIZAR' : 'CADASTRAR' }}
                         </span>
                     </v-btn>
                 </v-col>
@@ -82,6 +82,9 @@ export default {
         MglMarker    
     },        
     computed:{
+        isEdit() {
+            return this.$route.params.id
+        },
         getImpactos(){
             switch (this.atividadeSelecionada) {
                 case 'Demarcação de áreas de exploração e tráfego':
@@ -205,7 +208,13 @@ export default {
             ]
         }
     },
-    mounted(){
+    async mounted(){
+        if(this.isEdit.length) {
+            const response = await axios.get(`https://guanabara-backend.herokuapp.com/location-points/${this.isEdit}`)
+            this.atividadeSelecionada = response.data.activity
+            this.impactosSelecionados = response.data.impacts.split(';')
+            this.file = response.photo[0]?.formats?.thumbnail?.url || null
+        }
         console.log('dasdsad')
         EventBus.$on('ponto-campo', this.criarMarker)
     },
@@ -252,7 +261,35 @@ export default {
                 this.snackbar = true;
                 setTimeout(()=>this.$router.push('/'), 1500)
             });
-        },         
+        },
+        update(){         
+            this.isLoading = true;
+            const formData = new FormData();
+            let lng;
+            let lat;
+            navigator.geolocation.getCurrentPosition(async (data) => {
+                lng = data.coords.longitude;
+                lat = data.coords.latitude; 
+
+                formData.append(
+                    "data",
+                    `{ "lat": "${lat}",
+                    "lng": "${lng}",
+                    "activity": "${this.atividadeSelecionada}",
+                    "impacts": "${this.impactosSelecionados.join(';')}"
+                    }`);
+                formData.append("files.photo", this.file);
+
+                await axios.post("https://guanabara-backend.herokuapp.com/location-points", formData).then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                });       
+
+                this.isLoading = false
+                this.snackbar = true;
+                setTimeout(()=>this.$router.push('/'), 1500)
+            });
+        },            
         async onMapLoad(event) {          
             const asyncActions = event.component.actions;
             navigator.geolocation.getCurrentPosition((data) => {

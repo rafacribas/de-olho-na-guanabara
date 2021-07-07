@@ -20,6 +20,12 @@ const routes = [
     path: '/add',
     name: 'Criar Ponto',    
     component: () => import( '@/components/campo/CriarPonto.vue'),
+    children: [
+      {
+        path: ':id',
+        component: () => import( '@/components/campo/CriarPonto.vue')
+      },
+    ],
   },
   {  
     path: '/meusPontos',

@@ -2,6 +2,8 @@
   <v-container>
       <v-row >
         <v-col
+            @click="edit(marker.id)"
+            style="cursor: pointer"
             v-for="(marker,index) in locationPoints"
             :key="index" 
             :cols="12"
@@ -46,10 +48,16 @@ export default {
             locationPoints: []
         }
     },
+    methods:{    
+        edit(id){
+            this.$router.push(`/add/${id}`)
+        },
+    },
     async mounted() {
         const response = await axios.get('https://guanabara-backend.herokuapp.com/location-points')
         this.locationPoints = this.markers = response.data.map(item =>{
             let obj = {
+                'id': item.id,
                 'coord': [item.lng,item.lat],
                 'createdAt': item.createdAt,
                 'img': item.photo[0]?.formats?.thumbnail?.url || 'https://lh3.googleusercontent.com/proxy/IANwU9HZ1o22gAN5yYWcsKOJDdnCNj8w3GGZvxn34h8OMYB7-0ub0m-OFSfyjqP-9mhl_MQ-uSSANsxnkYQ6rvrNPhVmMUQ-RMN9UO-cIUNEy5jlgchQeQvn8uwcmc4b73mjzDxeq6GqeIDcJbV6bNxpk9XPNdfLdwKTIw',
