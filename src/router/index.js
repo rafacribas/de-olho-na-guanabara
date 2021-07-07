@@ -20,6 +20,11 @@ const routes = [
     path: '/add',
     name: 'Criar Ponto',    
     component: () => import( '@/components/campo/CriarPonto.vue'),
+  },
+  {  
+    path: '/meusPontos',
+    name: 'Meus Pontos',    
+    component: () => import( '@/components/meus-pontos/MeusPontos.vue'),
   }
 ]
 

@@ -5,7 +5,7 @@
             :timeout="timeout"
             >
             {{ text }}
-        </v-snackbar>
+        </v-snackbar>        
         <v-container class="snapshot-mapa pa-0">
             <MglMap class="mapa" :accessToken="accessToken" :mapStyle="mapStyle" :zoom="zoom"  @load="onMapLoad" >                      
                 <MglMarker :coordinates="coordinatesMarker" color="blue" />
@@ -106,8 +106,7 @@ export default {
             });
             
         },         
-        async onMapLoad(event) {
-            console.log('nMAP LOADED')
+        async onMapLoad(event) {          
             const asyncActions = event.component.actions;
             navigator.geolocation.getCurrentPosition((data) => {
                 asyncActions.flyTo({
