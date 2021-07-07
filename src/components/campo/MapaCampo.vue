@@ -3,15 +3,17 @@
       <router-view style="height:100%"/>
       <MglMap  class="mapa" :accessToken="accessToken" @load="onMapLoad" :mapStyle="mapStyle" :center="center" :zoom="zoom" > 
           <MglGeolocateControl :positionOptions="positionOptions" trackUserLocation position="top-right" />
+          <MglMarker v-for="marker in markers" :key="marker.index" :coordinates="marker.coord" color="blue" />
       </MglMap>
       <div class="d-flex justify-center mt-2" style="position:relative;bottom:130px">
           <v-btn            
               bottom
-              to="/add"
               @click="getUserLocation()"
               x-large
               elevation="2"
-              color="blue"
+              color="primary"
+              :loading="isLoading"
+              :disabled="isLoading"
               fab                
               style="color:white"
           ><v-icon>
@@ -25,22 +27,27 @@
 
 <script>
 import Mapbox from "mapbox-gl";
-import { MglMap, MglGeolocateControl } from "vue-mapbox";
+import { MglMap, MglGeolocateControl, MglMarker } from "vue-mapbox";
+import { EventBus } from '@/event-bus';
+import axios from 'axios'
 
 export default {
   name: 'MapaCampo',
   components: {
     MglMap,
-    MglGeolocateControl
+    MglGeolocateControl,
+    MglMarker
     },
   data() {
     return {
       accessToken: 'pk.eyJ1IjoiaGVucmlxdWUtbm9mdiIsImEiOiJja282YnM5MmswajFiMnBxbzkxNmNoeWR6In0.prYdkvzL5DuxvRKEYydGiQ',
       mapStyle: 'mapbox://styles/mapbox/outdoors-v11',
+      isLoading: false,
       zoom: 20,
       positionOptions: { enableHighAccuracy: true, timeout: 6000},
       coordCampo: [],
-      center: [0, 0] 
+      center: [0, 0],
+      markers: []
     };
   },
   methods:{
@@ -55,11 +62,16 @@ export default {
         })
     },
     getUserLocation(){
+      this.isLoading = true;
+      console.log('taporra')
           if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition((data) => {
                   console.log(data)
                   this.coordCampo[0] = data.coords.longitude;
-                  this.coordCampo[1] = data.coords.latitude;                                    
+                  this.coordCampo[1] = data.coords.latitude;     
+                  EventBus.$emit('ponto-campo', this.coordCampo)                               
+                  this.isLoading = false;
+                  this.$router.push('/add')
               });
           }
     }
@@ -67,6 +79,20 @@ export default {
   created() {
     // We need to set mapbox-gl library here in order to use it in template
     this.mapbox = Mapbox;
+  },
+  async mounted(){
+    const response = await axios.get('https://guanabara-backend.herokuapp.com/location-points')
+        console.log('res',response)       
+        this.markers = response.data.map(item =>{
+            let obj = {
+                'coord': [item.lng,item.lat],
+                'createdAt': item.createdAt,
+                'img': item.photo[0]?.formats?.thumbnail?.url || null,
+                'activity' : item.activity,
+                'impacts': item.impacts.split(';')
+            }
+            return obj
+        })
   }
 };
 </script>
