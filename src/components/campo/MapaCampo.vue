@@ -43,7 +43,7 @@ export default {
       accessToken: 'pk.eyJ1IjoiaGVucmlxdWUtbm9mdiIsImEiOiJja282YnM5MmswajFiMnBxbzkxNmNoeWR6In0.prYdkvzL5DuxvRKEYydGiQ',
       mapStyle: 'mapbox://styles/mapbox/outdoors-v11',
       isLoading: false,
-      zoom: 20,
+      zoom: 13,
       positionOptions: { enableHighAccuracy: true, timeout: 6000},
       coordCampo: [],
       center: [-49.251109,-25.4521746],
