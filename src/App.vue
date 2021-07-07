@@ -38,10 +38,10 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar color="primary" app>
+      <v-app-bar-nav-icon color="white" @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title color='blue'>De Olho na Guanabara</v-toolbar-title>
+      <v-toolbar-title style="color:white">De Olho na Guanabara</v-toolbar-title>
     </v-app-bar>
 
     <v-main>
