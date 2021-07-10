@@ -42,11 +42,11 @@ export default {
         return {
             accessToken: 'pk.eyJ1IjoiaGVucmlxdWUtbm9mdiIsImEiOiJja282YnM5MmswajFiMnBxbzkxNmNoeWR6In0.prYdkvzL5DuxvRKEYydGiQ',
             mapStyle: 'mapbox://styles/mapbox/outdoors-v11',
-            center: [-49.251109,-25.4521746],
+            center: [-43.12725,-22.81692],
             zoom: 11,
-            coordinatesMarker: [-43.1551208,-22.8855783],
-            coordinatesMarker2: [-43.1451208,-22.6885783],
-            coordinatesMarker3: [-43.1251208,-22.6885783],
+            coordinatesMarker: [-43.12725,-22.81692],
+            coordinatesMarker2: [-43.12725,-22.81692],
+            coordinatesMarker3: [-43.12725,-22.81692],
             imgTest: '',
             markers: []
 
