@@ -61,7 +61,7 @@
         items: [
         { title: 'Mapa', icon: 'mdi-map', link: '/' },
         { title: 'Adicionar Ponto', icon: 'mdi-map-marker-plus-outline', link: '/campo/' },
-        { title: 'Meus Pontos', icon: 'mdi-map-search',link: '/meusPontos' },
+        // { title: 'Meus Pontos', icon: 'mdi-map-search',link: '/meusPontos' },
       ] 
      }
    }
