@@ -47,6 +47,7 @@
                 <v-col cols="12">
                     <v-file-input
                         v-model="file"
+                        multiple
                         truncate-length="15"
                         chips
                         outlined
@@ -188,7 +189,7 @@ export default {
             mapStyle: 'mapbox://styles/mapbox/outdoors-v11',
             center: [-43.12725,-22.81692],
             zoom: 5,
-            file: null,
+            file: [],
             coordinatesMarker: [-43.12725, -22.81692],
             snackbar: false,
             text: 'Ponto cadastrado com sucesso!',
@@ -215,12 +216,17 @@ export default {
             this.impactosSelecionados = response.data.impacts.split(';')
             this.file = response.photo[0]?.formats?.thumbnail?.url || null
         }
-        console.log('dasdsad')
         EventBus.$on('ponto-campo', this.criarMarker)
+    },
+    watch: {
+        file(newV, oldV) {
+            if(newV[0]?.name !== oldV[0]?.name && oldV.length)
+                this.file.push(...oldV)
+
+        }
     },
     methods:{
         criarMarker(coord){
-            console.log('CRIAR MARKER', coord)
             this.coordinatesMarker = coord
         },
         async centeredLoc2(){
@@ -234,13 +240,11 @@ export default {
             return x
         },
         create(){         
-            console.log('chamei')
             this.isLoading = true;
             const formData = new FormData();
             let lng;
             let lat;
             navigator.geolocation.getCurrentPosition(async (data) => {
-                console.log('DATA', data)
                 lng = data.coords.longitude;
                 lat = data.coords.latitude; 
 
@@ -251,7 +255,10 @@ export default {
                     "activity": "${this.atividadeSelecionada}",
                     "impacts": "${this.impactosSelecionados.join(';')}"
                     }`);
-                formData.append("files.photo", this.file);
+                
+                this.file.forEach(f => {
+                    formData.append("files.photo", f);
+                });
 
                 await axios.post("https://guanabara-backend.herokuapp.com/location-points", formData).then(res => {
                     console.log(res);
