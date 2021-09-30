@@ -166,9 +166,8 @@ export default {
                         'Incremento das taxas de poluição atmosférica'                        
                     ]                                                                                
                 default:
-                    return ['erro','erro']
-                
-}
+                    return ['erro','erro']    
+            }
         },
         centeredLoc(){
             let x = [];
@@ -267,7 +266,7 @@ export default {
 
                 this.isLoading = false
                 this.snackbar = true;
-                setTimeout(()=>this.$router.push('/'), 1500)
+                setTimeout(()=>this.$router.push('/app'), 1500)
             });
         },
         update(){         

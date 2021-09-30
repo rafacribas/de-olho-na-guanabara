@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="pa-1" style="height:100%">           
+  <div style="height:100vh">           
         <MglMap class="mapa" :center="center" :accessToken="accessToken" :mapStyle="mapStyle" :zoom="zoom">                      
             <!-- <MglMarker :coordinates="coordinatesMarker" color="blue" /> -->
             <MglMarker v-for="marker in markers" :key="marker.index" :coordinates="marker.coord" color="blue">
@@ -25,7 +25,7 @@
                 </MglPopup>
             </MglMarker>
         </MglMap>
-  </v-container>
+  </div>
 </template>
 
 <script>

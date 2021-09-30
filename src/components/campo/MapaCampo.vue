@@ -63,7 +63,6 @@ export default {
     },
     getUserLocation(){
       this.isLoading = true;
-      console.log('taporra')
           if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition((data) => {
                   console.log(data)
@@ -71,7 +70,7 @@ export default {
                   this.coordCampo[1] = data.coords.latitude;     
                   EventBus.$emit('ponto-campo', this.coordCampo)                               
                   this.isLoading = false;
-                  this.$router.push('/add')
+                  this.$router.push('/app/add')
               });
           }
     }
