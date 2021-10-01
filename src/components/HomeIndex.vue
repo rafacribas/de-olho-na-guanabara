@@ -5,8 +5,14 @@
             <MglMarker v-for="marker in markers" :key="marker.index" :coordinates="marker.coord" color="blue">
                 <MglPopup anchor="bottom">
                     <VCard class="popup" elevation="0">                        
-                        <h2  class="text-center pb-2">{{marker.activity}}</h2>                        
-                        <img style="width:100%" v-if="marker.img" :src="marker.img" alt="">   
+                        <h2  class="text-center pb-2">{{marker.activity}}</h2>  
+                        
+                        <div class="text-xs-center mt-2" :style="`transform: rotate(90deg);`">
+                            <v-avatar tile size="200">
+                                <img style="width:100%" v-if="marker.img" :src="marker.img" alt="">   
+                            
+                            </v-avatar>                      
+                        </div>
                         <v-list>
                             <v-list-item class="ml-n4 mr-n4 mt-n8 mb-n8"  three-line v-for="(impact, index) in marker.impacts"
                                     :key="index">
@@ -62,6 +68,9 @@ export default {
                 'img': item.photo[0]?.formats?.thumbnail?.url || null,
                 'activity' : item.activity,
                 'impacts': item.impacts.split(';')
+            }
+            if (item.photo.length > 1){
+                console.log(`ITEM FODA`, item)
             }
             return obj
         })

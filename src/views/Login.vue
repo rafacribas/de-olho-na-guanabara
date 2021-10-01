@@ -1,9 +1,9 @@
 <template>
     <v-content>
-         <v-container fill-height class="pa-0">
+         <v-container fill-height class="pa-0" style="background-color:rgba(163, 221, 255)">
             <v-layout align-center justify-center>
                <v-flex xs12 sm8 md4>
-                  <v-card outlined flat>
+                  <v-card outlined flat class="ma-2">
                      <v-toolbar outlined flat dark color="primary">
                         <v-toolbar-title>Entrar</v-toolbar-title>
                      </v-toolbar>

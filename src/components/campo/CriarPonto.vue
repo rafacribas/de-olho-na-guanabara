@@ -45,6 +45,7 @@
             </v-row>
             <v-row>
                 <v-col cols="12">
+                   
                     <v-file-input
                         v-model="file"
                         multiple
@@ -53,11 +54,21 @@
                         outlined
                         hide-details
                         label="Foto"
+                        :clearable="false"
                         capture="user"
                         accept="image/*"
                         append-icon="mdi-camera"
                         prepend-icon=""
-                        ></v-file-input>
+                        >                        
+                           <template v-slot:selection="{ index, text }">
+                                <v-chip                               
+                                close
+                                @click:close="deleteChip(index)"
+                                >
+                                {{ text }}
+                                </v-chip>
+                            </template>
+                        </v-file-input>
                 </v-col>
                 <v-col cols="12" justify="center">
                     <v-btn  :loading="isLoading" :disabled="isLoading" @click="isEdit.length ? update() : create()" color="primary" x-large style="width: 100%">
@@ -225,6 +236,9 @@ export default {
         }
     },
     methods:{
+        deleteChip(index){
+            this.file.splice(index, 1)
+        },       
         criarMarker(coord){
             this.coordinatesMarker = coord
         },
