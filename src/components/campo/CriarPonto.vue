@@ -17,14 +17,28 @@
             </MglMap>
         </v-container>    
         <v-container>         
-            <v-row class="pt-2">
+            <v-row>
                 <v-col>
                     <v-select 
-                        v-model="atividadeSelecionada"
+                        v-model="categoriaSelecionada"
+                        outlined                        
+                        color="blue"
+                        no-data-text="Nenhuma categoria cadastrada"
+                        label="Categoria"
+                        :items="categorias"
+                        hide-details
+                    />
+                </v-col>
+            </v-row>
+            <v-row class="pt-2">
+                <v-col>
+                    <v-select
+                        :disabled="!categoriaSelecionada"
+                        v-model="elementoSelecionado"
                         outlined
                         color="blue"
-                        label="Atividade"
-                        :items="atividades"
+                        label="Elementos"
+                        :items="getElementos"
                         hide-details
                     />
                 </v-col>
@@ -37,8 +51,8 @@
                         multiple
                         color="blue"
                         label="Impactos"
-                        :disabled='!atividadeSelecionada'
-                        :items="getImpactos"
+                        :disabled='!elementoSelecionado'
+                        :items="impactos"
                         hide-details
                     />
                 </v-col>
@@ -97,85 +111,35 @@ export default {
         isEdit() {
             return this.$route?.params?.id || ''
         },
-        getImpactos(){
-            switch (this.atividadeSelecionada) {
-                case 'Demarcação de áreas de exploração e tráfego':
+        getElementos(){
+            switch (this.categoriaSelecionada) {
+                case 'Áreas de Fundeio':
                     return [
-                        'Retirada de acesso às áreas de pesca ou ao território pesqueiro ',
-                        'Loteamentos irregulares',
-                        'Alteração do regime tradicional de uso e ocupação ',
-                        'Maior vulnerabilidade/expulsão devido à falta/irregularidade na demarcação de território tradicional ou por residirem em área de dominío da união (questão fundiária)',
-                        'Deslocamento compulsório/expulsão das famílias para periferia ',
-                        'Perda de valor turístico'
+                        'Embarcações de grande porte',
+                        'Rebocadores',
+                        'Embarcações e carcaçasabandonadas ou naufragadas'                      
                         ]                    
-                case 'Incremento do fluxo de embarcações na região':
+                case 'Rotas de Embarcações de Grande Porte':
                     return [
-                        'Pesca ou caça predatória ',
-                        'Alteração do regime tradicional de uso e ocupação ',
-                        'Sobrepesca / diminuição da produtividade pesqueira ',
-                        'Diminuição da renda dos pescadores e pescadoras ',
-                        'Invasão/dano à área protegida ou unidade de conservação ambiental ',
-                        'Contaminação e intoxicação por substâncias nocivas ',
-                        'Perda de valor turístico'
+                        'Boias de Sinalização e demarcação de rotas',
+                        'Placas e postes de sinalização e informativos',
+                        'Atividade de dragagem'
                     ]
-                case 'Levantamentos geofísicos preliminares (Batimetria, mapeamento sísmico)':
+                case 'Estruturas de apoio':
                     return [
-                        'Poluição sonora',
-                        'Perda da biodiversidade ',
-                        'Alteração no ciclo reprodutivo da fauna '
+                        'Estaleiro',
+                        'Dutos (oleodutos, gasodutos)',
+                        'Terminal Aquaviário de Gás e Petróleo',
+                        'Plataforma ou Píer',
+                        'Refinarias',
+                        'Instalação Portuária',
+                        'Empresas de derivados do Petróleo',
+                        'Frente de obras/manutenção'
                     ]
-                case 'Alterações na dinâmica geoeconômica das áreas terrestres adjacentes':
+                case 'Outro':
                     return [
-                        'Especulação imobiliária ',
-                        'Evasão dos jovens da pesca ',
-                        'Alteração do regime tradicional de uso e ocupação ',
-                        'Perda de valor turístico',
-                    ]
-                case 'Perfuração de poços':
-                    return [
-                        'Contaminação e intoxicação por substâncias nocivas ',
-                        'Poluição atmosférica ',
-                        'Poluição de recurso hídrico',
-                        'Poluição sonora',
-                        'Poluição do solo ',
-                        'Mudanças da hidrodinâmica do estuário '
-                    ]
-                case 'Instalação e operação de plataformas ou navios-plataforma':
-                    return [
-                        'Poluição atmosférica ',
-                        'Poluição de recurso hídrico',
-                        'Poluição sonora',
-                        'Contaminação e intoxicação por substâncias nocivas ',
-                        'Alteração no ciclo reprodutivo da fauna ',
-                        'Sobrepesca / diminuição da produtividade pesqueira ',
-                        'Diminuição do consumo de pescado'                        
-
-                    ]
-                case 'Obras de instalação e manutenção de infra-estrutura':
-                    return [
-                        'Poluição de recurso hídrico',
-                        'Poluição do solo ',
-                        'Poluição atmosférica ',
-                        'Mudanças da hidrodinâmica do estuário',
-                        'Sobrepesca / diminuição da produtividade pesqueira ',
-                        'Diminuição do consumo de pescado'
-                    ]
-                case 'Translado constante de materiais, matéria prima e mão-de-obra':
-                    return [
-                        'Formação de lixões/depósitos de resíduos ',
-                        'Poluição atmosférica',
-                        'Poluição do solo',
-                        'Contaminação e intoxicação por substâncias nocivas',
-                        'Impactos sobre a segurança no trabalho ',
-                        'Alteração do regime tradicional de uso e ocupação ',
-                    ]
-                case 'Consequências inerentes à atividade industrial elevada e contínua':
-                    return [
-                        'Risco de acidentes operacionais',
-                        'Risco de contaminação da água, ar e do solo',
-                        'Impactos sobre a segurança no trabalho ',
-                        'Incremento das taxas de poluição atmosférica'                        
-                    ]                                                                                
+                        ''
+                    ]                                                                 
                 default:
                     return ['erro','erro']    
             }
@@ -193,7 +157,8 @@ export default {
     },
     data(){
         return {
-            atividadeSelecionada:'',
+            categoriaSelecionada: '',
+            elementoSelecionado: '',
             impactosSelecionados:[],
             accessToken: 'pk.eyJ1IjoiaGVucmlxdWUtbm9mdiIsImEiOiJja282YnM5MmswajFiMnBxbzkxNmNoeWR6In0.prYdkvzL5DuxvRKEYydGiQ',
             mapStyle: 'mapbox://styles/mapbox/outdoors-v11',
@@ -205,6 +170,11 @@ export default {
             text: 'Ponto cadastrado com sucesso!',
             timeout: 2000,
             isLoading: false,
+            categorias: [
+                'Áreas de Fundeio',
+                'Rotas de Embarcações de Grande Porte',
+                'Estruturas de apoio'
+            ],
             atividades:[
                 'Demarcação de áreas de exploração e tráfego',
                 'Incremento do fluxo de embarcações na região',
@@ -216,14 +186,37 @@ export default {
                 'Translado constante de materiais, matéria prima e mão-de-obra',
                 'Consequências inerentes à atividade industrial elevada e contínua'
 
+            ],
+            impactos: [
+                'Apropriação e ocupação do espaço marítimo',
+                'Alteração da dinâmica dos ecossistemas terrestres',
+                'Desapropriações e realocação das populações',
+                'Restrição de acesso aos pesqueiros tradicionais',
+                'Alterações das características das comunidades tradicionais',
+                'Riscos de desastres ambientais',
+                'Riscos à saúde das populações',
+                'Perda da biodiversidade',
+                'Mudança na hidrodinâmica do estuário',
+                'Emissão sonora sobre o meio biótico',
+                'Supressão vegetal',
+                'Alteração na qualidade da água',
+                'Alteração na qualidade do sedimento',
+                'Aumento na turbidez na massa d’água',
+                'Alteração da qualidade sonora',
+                'Erosão e assoreamento',
+                'Despejo de efluentes',
+                'Poluição luminosa',
+                'Poluição do ar',
+                'Criogênica de temperatura'
             ]
         }
     },
     async mounted(){
         if(this.isEdit.length) {
             const response = await axios.get(`https://guanabara-backend.herokuapp.com/location-points/${this.isEdit}`)
-            this.atividadeSelecionada = response.data.activity
+            this.elementoSelecionado = response.data.elements
             this.impactosSelecionados = response.data.impacts.split(';')
+            this.categoriaSelecionada = response.data.categories
             this.file = response.photo[0]?.formats?.thumbnail?.url || null
         }
         EventBus.$on('ponto-campo', this.criarMarker)
@@ -242,16 +235,6 @@ export default {
         criarMarker(coord){
             this.coordinatesMarker = coord
         },
-        async centeredLoc2(){
-            let x = [];
-    
-            await navigator.geolocation.getCurrentPosition((data) => {
-                x[0] = data.coords.longitude;
-                x[1] = data.coords.latitude;        
-            });
-        
-            return x
-        },
         create(){         
             this.isLoading = true;
             const formData = new FormData();
@@ -265,14 +248,14 @@ export default {
                     "data",
                     `{ "lat": "${lat}",
                     "lng": "${lng}",
-                    "activity": "${this.atividadeSelecionada}",
-                    "impacts": "${this.impactosSelecionados.join(';')}"
+                    "categories": "${this.categoriaSelecionada}",
+                    "impacts": "${this.impactosSelecionados.join(';')}",
+                    "elements": "${this.elementoSelecionado}"
                     }`);
                 
                 this.file.forEach(f => {
                     formData.append("files.photo", f);
                 });
-
                 await axios.post("https://guanabara-backend.herokuapp.com/location-points", formData).then(res => {
                     console.log(res);
                     console.log(res.data);
@@ -296,7 +279,8 @@ export default {
                     "data",
                     `{ "lat": "${lat}",
                     "lng": "${lng}",
-                    "activity": "${this.atividadeSelecionada}",
+                    "elements": "${this.elementoSelecionado}",
+                    "categories": "${this.categoriaSelecionada}",
                     "impacts": "${this.impactosSelecionados.join(';')}"
                     }`);
                 formData.append("files.photo", this.file);
@@ -315,7 +299,7 @@ export default {
             const asyncActions = event.component.actions;
             navigator.geolocation.getCurrentPosition((data) => {
                 this.coordinatesMarker = [data.coords.longitude, data.coords.latitude]
-                asyncActions.flyTo({
+                asyncActions.easeTo({
                     center: [data.coords.longitude, data.coords.latitude],
                     zoom: 13,
                     speed: 1
