@@ -54,7 +54,7 @@ export default {
     async onMapLoad(event) {
         const asyncActions = event.component.actions;
         navigator.geolocation.getCurrentPosition((data) => {
-            asyncActions.easeTo({
+            asyncActions.flyTo({
                 center: [data.coords.longitude, data.coords.latitude],
                 zoom: 13,
                 speed: 1

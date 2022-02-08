@@ -52,4 +52,15 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  console.log('aaa tp', to.path)
+  if (to.path != '/login' && to.path != '/'){
+    if(window.sessionStorage.getItem('auth'))
+      next()
+    else
+      window.location.assign('/login')
+  }
+  next()
+})
+
 export default router
