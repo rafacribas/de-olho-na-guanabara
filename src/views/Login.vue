@@ -12,15 +12,16 @@
             Guanabara!
          </p>
       </div>
-      <form class="login" method="POST">
+      <form @submit.prevent="submitForm" class="login" method="POST">
          <div>
            <h1>Login</h1>
-           <input type="email" placeholder="Email"  name="user">
+           <input v-model="inputEmail" type="email" placeholder="Email"  name="user">
          </div>
 				<div>
-               <input type="password" placeholder="Senha" name="password">
+               <input v-model="inputPassword" type="password" placeholder="Senha" name="password">
             </div>
 				<div>
+            <span v-if="error" class="red--text">Login ou senha incorretos!</span>
                <input type="submit" value="Entrar">
             </div>
       </form>
@@ -33,8 +34,9 @@
 export default {
     data() {
         return { 
+          error: false,
             user: {
-                email: 'admin@example.com',
+                email: 'admin@guanabara.com',
                 password: 'admin',
                 name: 'John Doe',
             },
@@ -42,7 +44,22 @@ export default {
                 isLoggingIn: true,
                 shouldStayLoggedIn: true,
             },
+            inputEmail: '',
+            inputPassword: ''
         }
+    },
+    methods: {
+      submitForm() {
+        if(this.inputEmail === 'admin@guanabara.com' && this.inputPassword === "admin"){
+          window.sessionStorage.setItem('auth', true)
+          window.location.assign('/app')
+          
+        } else {
+          window.sessionStorage.setItem('auth', false)
+          this.error = true
+        }
+          
+      }
     }
 }
 </script>
