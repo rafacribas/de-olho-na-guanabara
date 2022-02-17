@@ -5,16 +5,19 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: () =>import( '@/components/HomeIndex.vue')
-  },
-  {
-    path: '/app',
     name: 'RouterView',
     component: () =>import( '@/views/RouterView.vue'),
     children: [
       {
         path: '/',
+        name: 'Home',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>import( '@/components/HomeIndex.vue')
+      },
+      {
+        path: '/app',
         name: 'Campo',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
@@ -22,7 +25,7 @@ const routes = [
         component: () =>import( '@/components/campo/MapaCampo.vue')
       },
       {  
-        path: 'add',
+        path: '/app/add',
         name: 'Criar Ponto',    
         component: () => import( '@/components/campo/CriarPonto.vue'),
         children: [
@@ -53,7 +56,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('aaa tp', to.path)
   if (to.path != '/login' && to.path != '/'){
     if(window.sessionStorage.getItem('auth'))
       next()

@@ -43,36 +43,30 @@ export default {
       accessToken: 'pk.eyJ1IjoiaGVucmlxdWUtbm9mdiIsImEiOiJja282YnM5MmswajFiMnBxbzkxNmNoeWR6In0.prYdkvzL5DuxvRKEYydGiQ',
       mapStyle: 'mapbox://styles/mapbox/outdoors-v11',
       isLoading: false,
-      zoom: 13,
+      zoom: 10,
       positionOptions: { enableHighAccuracy: true, timeout: 6000},
       coordCampo: [],
       center: [-43.12725,-22.81692],
-      markers: []
+      markers: [],
+      userLocation: null
     };
   },
   methods:{
-    async onMapLoad(event) {
-        const asyncActions = event.component.actions;
-        navigator.geolocation.getCurrentPosition((data) => {
-            asyncActions.flyTo({
-                center: [data.coords.longitude, data.coords.latitude],
-                zoom: 13,
-                speed: 1
-            }) 
-        })
+    async onMapLoad() {
+        // const asyncActions = event.component.actions;
+        // navigator.geolocation.getCurrentPosition((data) => {
+        //     asyncActions.flyTo({
+        //         center: [data.coords.longitude, data.coords.latitude],
+        //         zoom: 13,
+        //         speed: 1
+        //     }) 
+        // })
     },
     getUserLocation(){
       this.isLoading = true;
-          if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition((data) => {
-                  console.log(data)
-                  this.coordCampo[0] = data.coords.longitude;
-                  this.coordCampo[1] = data.coords.latitude;     
-                  EventBus.$emit('ponto-campo', this.coordCampo)                               
-                  this.isLoading = false;
-                  this.$router.push('/app/add')
-              });
-          }
+       setTimeout(() => {console.log("this is the first message")}, 1000);
+      this.isLoading = false;          
+      this.$router.push('/app/add')
     }
   },
   created() {
@@ -92,6 +86,15 @@ export default {
             }
             return obj
         })
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((data) => {
+          console.log(data)
+          this.coordCampo[0] = data.coords.longitude;
+          this.coordCampo[1] = data.coords.latitude;     
+          EventBus.$emit('ponto-campo', this.coordCampo)                               
+      });
+    }
   }
 };
 </script>

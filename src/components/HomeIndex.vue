@@ -7,15 +7,18 @@
                     <VCard class="popup" elevation="0">                        
                         <h2  class="text-center pb-2">{{marker.activity}}</h2>  
                         
-                        <div class="text-xs-center mt-2" :style="`transform: rotate(90deg);`">
-                            <v-avatar tile size="200">
-                                <img style="width:100%" v-if="marker.img" :src="marker.img" alt="">   
-                            
+                        <div class="d-flex justify-center mt-2">
+                            <v-avatar tile size="200" class="mb-2" v-if="marker.img">
+                                <img  style="width:100%" :src="marker.img" alt="">                               
                             </v-avatar>                      
                         </div>
                         <v-list>
-                            <v-list-item class="ml-n4 mr-n4 mt-n8 mb-n8"  three-line v-for="(impact, index) in marker.impacts"
-                                    :key="index">
+                            <v-list-item 
+                                class="ml-n4 mr-n4 mt-n8 mb-n8"
+                                three-line
+                                v-for="(impact, index) in marker.impacts"
+                                :key="index"
+                            >
 
                                 <v-list-item-content >
                                     <v-list-item-subtitle>
@@ -46,10 +49,10 @@ export default {
     },
     data(){
         return {
-            accessToken: 'pk.eyJ1IjoiaGVucmlxdWUtbm9mdiIsImEiOiJja282YnM5MmswajFiMnBxbzkxNmNoeWR6In0.prYdkvzL5DuxvRKEYydGiQ',
-            mapStyle: 'mapbox://styles/mapbox/outdoors-v11',
+            accessToken: 'pk.eyJ1IjoicmFmYWNyaWJhcyIsImEiOiJjazloZ3R0aW0weWIxM2ZwOWl2bTZ5aHhrIn0.q8zXHOGQxnHffPu-T6L85A',
+            mapStyle: 'mapbox://styles/rafacribas/ckzeatahj001f14ovgcmejp97',
             center: [-43.12725,-22.81692],
-            zoom: 11,
+            zoom: 10,
             coordinatesMarker: [-43.12725,-22.81692],
             coordinatesMarker2: [-43.12725,-22.81692],
             coordinatesMarker3: [-43.12725,-22.81692],
@@ -65,22 +68,21 @@ export default {
             let obj = {
                 'coord': [item.lng,item.lat],
                 'createdAt': item.createdAt,
-                'img': item.photo[0]?.formats?.thumbnail?.url || null,
+                'img': item.photo[0]?.url || null,
                 'activity' : item.activity,
                 'impacts': item.impacts.split(';')
             }
-            if (item.photo.length > 1){
-                console.log(`ITEM FODA`, item)
+            if (item.elements){
+                obj['elements'] = item.elements
             }
             return obj
         })
     },
     methods:{
         async onMapLoad(event) {
-            console.log('nMAP LOADED')
             const asyncActions = event.component.actions;
             navigator.geolocation.getCurrentPosition((data) => {
-                asyncActions.flyTo({
+                asyncActions.easeTo({
                     center: [data.coords.longitude, data.coords.latitude],
                     zoom: 10,
                     speed: 1
