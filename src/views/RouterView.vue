@@ -37,9 +37,16 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <template v-slot:append>
+        <div class="pa-2">
+          <v-btn @click="logoff" block color="secondary">
+            Sair
+          </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
 
-    <v-app-bar color="primary" app>
+    <v-app-bar color="secondary" app>
       <v-app-bar-nav-icon color="white" @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title style="color:white">De Olho na Guanabara</v-toolbar-title>
@@ -60,10 +67,16 @@
      return{
        drawer:null,
         items: [
-        { title: 'Mapa', icon: 'mdi-map', link: '/' },
-        { title: 'Adicionar Ponto', icon: 'mdi-map-marker-plus-outline', link: '/app' },
+        { title: 'Mapa', icon: 'mdi-map-marker-plus-outline', link: '/app' },
+        // { title: 'Pontos cadastrados', icon: 'mdi-map', link: '/meusPontos' },
         // { title: 'Meus Pontos', icon: 'mdi-map-search',link: '/meusPontos' },
       ] 
+     }
+   },
+   methods: {
+     logoff() {
+       window.sessionStorage.setItem('auth', false)
+       window.location.assign('/')
      }
    }
   }

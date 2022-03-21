@@ -53,12 +53,13 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('aaa tp', to.path)
   if (to.path != '/login' && to.path != '/'){
-    if(window.sessionStorage.getItem('auth'))
-      next()
-    else
+    const existsSessionAuth = window.sessionStorage.getItem('auth')
+
+    if(existsSessionAuth === 'false' || !existsSessionAuth){
       window.location.assign('/login')
+    }
+      
   }
   next()
 })

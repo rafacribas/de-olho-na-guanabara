@@ -10,13 +10,11 @@
             <span class="d-flex justify-center">
             {{ text }}
             </span>
-        </v-snackbar>        
-        <v-container class="snapshot-mapa pa-0">
-            <MglMap class="mapa" :accessToken="accessToken" :mapStyle="mapStyle" :zoom="zoom"  @load="onMapLoad" >                      
-                <MglMarker :coordinates="coordinatesMarker" color="blue" />
-            </MglMap>
-        </v-container>    
+        </v-snackbar>
         <v-container>         
+            <h1>
+                Cadastro de ponto
+            </h1>
             <v-row class="pt-2">
                 <v-col>
                     <v-select 
@@ -45,7 +43,6 @@
             </v-row>
             <v-row>
                 <v-col cols="12">
-                   
                     <v-file-input
                         v-model="file"
                         multiple
@@ -83,16 +80,11 @@
 </template>
 
 <script>
-import { MglMap, MglMarker } from "vue-mapbox";
 import axios from 'axios'
 import { EventBus } from '@/event-bus';
 
 export default {
     name: 'CriarPonto',
-    components: {
-        MglMap,
-        MglMarker    
-    },        
     computed:{
         isEdit() {
             return this.$route?.params?.id || ''
