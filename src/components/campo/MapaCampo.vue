@@ -8,9 +8,11 @@
             <div>
                 <h3>{{marker.activity}}</h3>
                 <v-carousel
-                    cycle
-                    height="200"
-                    hide-delimiter-background
+                  cycle
+                   v-if="marker.img.length > 1"
+                  height="200"
+                  hide-delimiter-background
+                  hide-delimiters
                 >
                     <v-carousel-item
                         v-for="(slide, i) in marker.img"
@@ -18,6 +20,7 @@
                         :src="slide"
                     />
                 </v-carousel>
+                <v-img v-else class="ma-1" :src="marker.img[0]"></v-img>
                 <ul>
                     <li v-for="(impact, index) in marker.impacts" :key="impact + index">{{impact}}</li>
                 </ul>  
@@ -79,7 +82,7 @@ export default {
     async onMapLoad(event) {
         const asyncActions = event.component.actions;
         navigator.geolocation.getCurrentPosition((data) => {
-            asyncActions.flyTo({
+            asyncActions.easeTo({
                 center: [data.coords.longitude, data.coords.latitude],
                 zoom: 13,
                 speed: 1
