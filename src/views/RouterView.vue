@@ -37,7 +37,7 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      <template v-slot:append>
+      <template v-slot:append v-if="isLoggedin">
         <div class="pa-2">
           <v-btn @click="logoff" block color="secondary">
             Sair
@@ -77,6 +77,12 @@
      logoff() {
        window.sessionStorage.setItem('auth', false)
        window.location.assign('/')
+     }
+   },
+   computed:{
+     isLoggedin(){
+       const existsSessionAuth = window.sessionStorage.getItem('auth')
+       return existsSessionAuth == 'false'|| !existsSessionAuth ? false : true
      }
    }
   }
