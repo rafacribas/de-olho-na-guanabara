@@ -114,10 +114,6 @@ export default {
         }
     },
     methods:{
-        removeLayers(){
-            this.geoJsonSource = null,
-            this.geoJsonLayer = null
-        },
         // descomentar quando estiver testando em cwb 
 
         // async onMapLoad(event) {
