@@ -240,7 +240,7 @@ export default {
                     "data",
                     `{ "lat": "${lat}",
                     "lng": "${lng}",
-                    "activity": "${this.categoriaSelecionada}",
+                    "categories": "${this.categoriaSelecionada}",
                     "impacts": "${this.impactosSelecionados.join(';')}",
                     "elements": "${this.elementoSelecionado}"
                     }`);
