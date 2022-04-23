@@ -67,7 +67,7 @@
      return{
        drawer:null,
         items: [
-        { title: 'Mapa', icon: 'mdi-map-marker-plus-outline', link: '/app' },
+        { title: 'Mapa Campo', icon: 'mdi-map-marker-plus-outline', link: '/app' },
         // { title: 'Pontos cadastrados', icon: 'mdi-map', link: '/meusPontos' },
         // { title: 'Meus Pontos', icon: 'mdi-map-search',link: '/meusPontos' },
       ] 

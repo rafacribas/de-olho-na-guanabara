@@ -1,14 +1,18 @@
 <template>
     <v-container class="pa-0" fluid style="height:100%">      
       <router-view style="height:100%"/>
-      <MglMap  class="mapa" :accessToken="accessToken" @load="onMapLoad" :mapStyle="mapStyle" :center="center" :zoom="zoom" > 
+      <MglMap  class="mapa" :accessToken="accessToken" :mapStyle="mapStyle" :center="center" :zoom="zoom" > 
           <MglGeolocateControl :positionOptions="positionOptions" trackUserLocation position="top-right"/>
-          <MglMarker @click="showDetails(marker)" v-for="marker in markers" :key="marker.index" :coordinates="marker.coord" color="blue">
+          <MglMarker v-for="marker in markers" :key="marker.index" :coordinates="marker.coord" color="blue">
             <MglPopup :coordinates="marker.coord">
             <div>
-                <h3>{{marker.activity}}</h3>
+                <h3>{{marker.categories}}</h3>
+                <div v-if="marker.elements" class="d-flex justify-center">                        
+                    <h5 v-for="(element, index) in marker.elements" :key="element + index">{{element}}</h5>
+                </div>
                 <v-carousel
                     cycle
+                    v-if="marker.img.length > 1"
                     height="200"
                     hide-delimiter-background
                 >
@@ -18,6 +22,7 @@
                         :src="slide"
                     />
                 </v-carousel>
+                <v-img v-else :src="marker.img[0]"></v-img>
                 <ul>
                     <li v-for="(impact, index) in marker.impacts" :key="impact + index">{{impact}}</li>
                 </ul>  
@@ -45,10 +50,10 @@ export default {
     },
   data() {
     return {
-      accessToken: 'pk.eyJ1IjoiaGVucmlxdWUtbm9mdiIsImEiOiJja282YnM5MmswajFiMnBxbzkxNmNoeWR6In0.prYdkvzL5DuxvRKEYydGiQ',
-      mapStyle: 'mapbox://styles/mapbox/outdoors-v11',
+      accessToken: 'pk.eyJ1IjoicmFmYWNyaWJhcyIsImEiOiJjazloZ3R0aW0weWIxM2ZwOWl2bTZ5aHhrIn0.q8zXHOGQxnHffPu-T6L85A',
+      mapStyle: 'mapbox://styles/rafacribas/cl1ye632t001j14ms7r26m9md',
       isLoading: false,
-      zoom: 13,
+      zoom: 11,
       positionOptions: { enableHighAccuracy: true, timeout: 1500},
       coordCampo: [],
       center: [-43.12725,-22.81692],
@@ -56,30 +61,21 @@ export default {
     };
   },
   methods:{
-    showDetails(item) {
-      console.log('cliquei', item)
-    },
-    async onMapLoad(event) {
-        const asyncActions = event.component.actions;
-        navigator.geolocation.getCurrentPosition((data) => {
-            asyncActions.flyTo({
-                center: [data.coords.longitude, data.coords.latitude],
-                zoom: 13,
-                speed: 1
-            }) 
-        })
-    },
+    // showDetails(item) {
+    // },
+    // async onMapLoad(event) {
+    // },
     getUserLocation(){
-      this.isLoading = true;
-          if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition((data) => {
-                  this.coordCampo[0] = data.coords.longitude;
-                  this.coordCampo[1] = data.coords.latitude;     
-                  EventBus.$emit('ponto-campo', this.coordCampo)                               
-                  this.isLoading = false;
-                  this.$router.push('/app/add')
-              });
-          }
+        this.isLoading = true;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((data) => {
+                    this.coordCampo[0] = data.coords.longitude;
+                    this.coordCampo[1] = data.coords.latitude;     
+                    EventBus.$emit('ponto-campo', this.coordCampo)                               
+                    this.isLoading = false;
+                    this.$router.push('/app/add')
+                });
+            }
     }
   },
   created() {
@@ -98,8 +94,9 @@ export default {
                 'coord': [item.lng,item.lat],
                 'createdAt': item.createdAt,
                 'img': photos,
-                'activity' : item.activity,
-                'impacts': item.impacts.split(';')
+                'elements' : item.elements.split(';'),
+                'impacts': item.impacts.split(';'),
+                'categories': item.categories
             }
             return obj
         })
