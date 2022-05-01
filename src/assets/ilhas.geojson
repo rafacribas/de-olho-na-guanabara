@@ -1,0 +1,120 @@
+{
+    "type": "FeatureCollection",
+    "name": "Ilhas",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+    },
+    "features": [
+        {
+            "id":1,
+            "type": "Feature",
+            "properties": {
+                "Name": "Ilha da Conceição",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.119475,
+                    -22.871099,
+                    0.0
+                ]
+            }
+        },
+        {
+            "id":2,
+            "type": "Feature",
+            "properties": {
+                "Name": "Ilha Comprida ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.12353,
+                    -22.80576,
+                    0.0
+                ]
+            }
+        },
+        {
+            "id":3,
+            "type": "Feature",
+            "properties": {
+                "Name": "Ilha Cotunduba",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.149824,
+                    -22.96402,
+                    0.0
+                ]
+            }
+        },
+        {
+            "id":4,
+            "type": "Feature",
+            "properties": {
+                "Name": "Ilha da Laje",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.146906,
+                    -22.9345,
+                    0.0
+                ]
+            }
+        },
+        {
+            "id":5,
+            "type": "Feature",
+            "properties": {
+                "Name": "Ilha da Boa Viagem",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.130885,
+                    -22.910619,
+                    0.0
+                ]
+            }
+        },
+        {
+            "id":6,
+            "type": "Feature",
+            "properties": {
+                "Name": "Ilha d'Água",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.162962901289113,
+                    -22.81284294015796,
+                    0.0
+                ]
+            }
+        }
+    ]
+}

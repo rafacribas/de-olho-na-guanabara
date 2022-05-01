@@ -1,0 +1,80 @@
+{
+    "id" : 1,
+    "type":"FeatureCollection",
+    "name": "pescadores",
+    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "features":[
+        {
+            "id":1,
+            "type": "Feature",
+            "properties": {
+                "Name": "COMPERJ - Complexo Petroquímico do Estado do Rio de Janeiro",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -42.853969101215469,
+                    -22.660874003994881,
+                    0.0
+                ]
+            }
+        },
+        {
+            "id":2,
+            "type": "Feature",
+            "properties": {
+                "Name": "Arlanxeo Brasil (GASES)",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.251483,
+                    -22.718197,
+                    0.0
+                ]
+            }
+        },
+        {
+            "id":3,
+            "type": "Feature",
+            "properties": {
+                "Name": "CHEVRON Brasil",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.258827,
+                    -22.715035,
+                    0.0
+                ]
+            }
+        },
+        {
+            "id":4,
+            "type": "Feature",
+            "properties": {
+                "Name": "Base BRASKEM (GASES)",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.243635,
+                    -22.714382,
+                    0.0
+                ]
+            }
+        }
+    ]
+}

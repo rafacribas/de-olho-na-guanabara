@@ -1,0 +1,62 @@
+{
+    "id" : 1,
+    "type":"FeatureCollection",
+    "name": "pescadores",
+    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "features":[
+        {
+            "id": 1,
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores do Bairro Barbuda ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.029596,
+                    -22.670886,
+                    0.0
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores e Catadores de Caranguejos de Suruí ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.118604,
+                    -22.665138996686711,
+                    0.0
+                ]
+            }
+        },
+        {   
+            "id": 3,
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores do Quadrado da Urca ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.169239,
+                    -22.952258,
+                    0.0
+                ]
+            }
+        }
+    ]
+}

@@ -1,54 +1,53 @@
 <template>
-    <v-container class="pa-0" fluid style="height:100%">      
+    <v-container class="pa-0" fluid style="height:100%">
         <router-view style="height:100%"/>
-        <div class="style-container">             
-            <v-btn large @click="changeStyle()" icon> <v-icon :color="isSatellite ? 'blue' : ''">mdi-satellite-variant</v-icon></v-btn> <br>            
-        </div>
-        <div class="layers-container">                        
-            <div v-if="opentestekey">
-                <v-btn small dense @click="opentestekey = false">x</v-btn>
-                <div>
-                    {{opentestecontent}}
+        
+                <div class="style-container">             
+                    <v-btn large @click="changeStyle()" icon> <v-icon :color="isSatellite ? 'blue' : ''">mdi-satellite-variant</v-icon></v-btn> <br>            
                 </div>
-            </div>
-        </div>
-        <MglMap 
-            @load="onMapLoaded"
-            class="mapa"
-            :accessToken="accessToken"
-            :mapStyle="mapStyle"
-            :center="center"
-            :zoom="zoom"
-
-            > 
-            <!-- <MglMarker v-for="marker in markers" :key="marker.index" :coordinates="marker.coord" color="blue">
-                <MglPopup :coordinates="marker.coord">
+                <div v-if="opentestekey" class="layers-container">                        
                     <div>
-                        <h3>{{marker.categories}}</h3>
-                        <div v-if="marker.elements" class="d-flex justify-center">                        
-                            <h5 v-for="(element, index) in marker.elements" :key="element + index">{{element}}</h5>
+                        <div class="d-flex justify-end">
+                        <v-btn class="ma-2" small dense @click="opentestekey = false"><v-icon>mdi-close</v-icon></v-btn>
+
                         </div>
-                        <v-carousel
-                            v-if="marker.img.length > 1"
-                            cycle
-                            hide-delimiters
-                            height="200"
-                            hide-delimiter-background
-                        >
-                            <v-carousel-item
-                                v-for="(slide, i) in marker.img"
-                                :key="i"
-                                :src="slide"
-                            />
-                        </v-carousel>
-                        <v-img v-else :src="marker.img[0]"></v-img>
-                        <ul>
-                            <li v-for="(impact, index) in marker.impacts" :key="impact + index">{{impact}}</li>
-                        </ul>  
+                        <div>
+                            {{opentestecontent}}
+                        </div>
                     </div>
-                </MglPopup>
-            </MglMarker> -->
-        </MglMap>
+                </div>
+                <div>                        
+                    <div class="layers-container" style="z-index:2">
+                        <div class="header-info">
+
+                        </div>
+                        <!-- <div>
+                            <v-btn v-for="(layer, index) in layers" :key="index" @click="mapShow(layer.value)">{{layer.name}}</v-btn>                            
+                        </div> -->
+                        <v-list rounded>
+                            <v-list-item v-for="(layer, index) in layers" :key="index">
+                                <v-checkbox
+                                    @click="mapShow(layer.value)"
+                                    v-model="layer.visibility"
+                                    :label="layer.name"
+                                > </v-checkbox>
+                            </v-list-item>
+
+                        </v-list>
+                    </div>
+                </div>
+                <MglMap 
+                    @click="opentestekey=false"
+                    @load="onMapLoaded"
+                    class="mapa"
+                    :accessToken="accessToken"
+                    :mapStyle="mapStyle"
+                    :center="center"
+                    :zoom="zoom"
+                    > 
+                </MglMap>
+
+
     </v-container>
     
 </template>
@@ -56,17 +55,29 @@
 <script>
 /* eslint-disable vue/no-unused-components */
 /* eslint-disable vue/no-unused-vars */
-import { MglMap, MglMarker,MglPopup, MglGeojsonLayer } from "vue-mapbox";
+
 import poligonos from '../assets/poligonos.geojson'
+import estaleiros from '../assets/estaleiros.geojson'
+import pescadores from '../assets/pescadores.geojson'
 import poligonosLabel from '../assets/poligonos-label.geojson'
+import ilhas from '../assets/ilhas.geojson'
+import entidades from '../assets/entidades.geojson'
+import refinarias from '../assets/refinarias.geojson'
+import { MglMap, MglMarker,MglPopup, MglGeojsonLayer } from "vue-mapbox";
 import marcadores from '../assets/marcadores.geojson'
 import Mapbox from 'mapbox-gl'
+ // eslint-disable-next-line no-unused-vars
 import axios from 'axios'
 import polylabel from 'polylabel'
-import GeoJSON from 'geojson'
-
+ // eslint-disable-next-line no-unused-vars
+/* eslint-disable vue/no-unused-vars */
 import oilBarrel from '../assets/oil-barrel.png'
 import oilDrop from '../assets/oil-drop.png'
+import refinariaIcon from '../assets/refinery.png'
+import pescadoresIcon from '../assets/fishing-net.png'
+import island from '../assets/island.png'
+import entidadesIcon from '../assets/hands.png'
+import shipyard from '../assets/shipyard.png'
 
 let map = null;
 
@@ -90,6 +101,41 @@ export default {
     },
     data(){
         return {
+            layers: [
+                {
+                    name: 'Refinarias',
+                    value: 'markers',
+                    visibility: true
+                },
+                {
+                    name: 'Pescadores',
+                    value: 'markers2',
+                    visibility: true
+                },
+                {
+                    name: 'Ilhas',
+                    value: 'markers3',
+                    visibility: true
+                },
+                {
+                    name: 'Entidades',
+                    value: 'markers4',
+                    visibility: true
+                },
+                {
+                    name: 'Estaleiros',
+                    value: 'markers5',
+                    visibility: true
+                }
+            ],
+            estaleiros: estaleiros,
+            marcadores:marcadores,
+            poligonos: poligonos,
+            pescadores: pescadores,
+            poligonosLabel: poligonosLabel,
+            ilhas: ilhas,
+            entidades: entidades,
+            refinarias: refinarias,
             responseData: null,
             markersData: {
                 id : 1,
@@ -103,9 +149,6 @@ export default {
                 [-43.66336, -22.3557]
 
             ],
-            marcadores:marcadores,
-            poligonos: poligonos,
-            poligonosLabel: poligonosLabel,
             opentestekey: false,
             opentestecontent: '',
             primaryColor: 'rgba(255,150,180,0.98)',
@@ -128,68 +171,157 @@ export default {
         }
     },
     methods:{    
+        mapShow(layerId){
+            const visibility =  map.getLayoutProperty(layerId,'visibility')
+            console.log(`visibility`, visibility)
+            let state = null;
+            state = visibility == 'visible' ? 'none' : 'visible'
+            console.log(`state`, state)
+            map.setLayoutProperty(layerId, 'visibility', state);
+
+        },
         loadData(){
             map.addSource('poligonos',this.geoJsonPoligonos)
             map.addSource('poligonos-label',this.geoJsonPoligonosLabel)
+            map.addSource('pescadores', {type:'geojson',data:this.pescadores})
 
-            let geoJsonMarcadores = {
-                type: 'geojson',
-                data:  GeoJSON.parse(this.responseData,{Point:['lat', 'lng']})
-            }
+            map.addSource('refinarias', {type:'geojson', data:this.refinarias})
+            map.addSource('ilhas', {type:'geojson', data:this.ilhas})
+            map.addSource('estaleiros', {type:'geojson', data:this.estaleiros})
 
-            map.addSource('marcadores', geoJsonMarcadores)
+            map.addSource('entidades', {type:'geojson', data:this.entidades})
+            // let geoJsonMarcadores = {
+            //     type: 'geojson',
+            //     data:  GeoJSON.parse(this.responseData,{Point:['lat', 'lng']})
+            // }
 
-            console.log(`geoJsonMarcadores`, geoJsonMarcadores)
+            // map.addSource('marcadores', geoJsonMarcadores)
+
+            // console.log(`geoJsonMarcadores`, geoJsonMarcadores)
             console.log(`geoJsonPoligonosLabel`, this.geoJsonPoligonosLabel)
 
-            let centroPoligono = polylabel(poligonos.features[2].geometry.coordinates, 1.0);
-            console.log('centroPoligono', centroPoligono)
+            
 
             //  Adiciona layer de poligonos
-            map.addLayer({
-                id: 'poligonos-fill',
-                type: 'fill',
-                source: 'poligonos',
-                paint: {
-                    'fill-color': 'rgb(46, 45, 42)',
-                    'fill-opacity': [
-                        'case',
-                        ['boolean', ['feature-state', 'hover'], false],
-                        1,
-                        0.7
-                    ]
-                }
-            })
+            // map.addLayer({
+            //     id: 'poligonos-fill',
+            //     type: 'fill',
+            //     source: 'poligonos',
+            //     paint: {
+            //         'fill-color': 'rgb(46, 45, 42)',
+            //         'fill-opacity': [
+            //             'case',
+            //             ['boolean', ['feature-state', 'hover'], false],
+            //             1,
+            //             0.7
+            //         ]
+            //     }
+            // })
             // Adiciona layer de contorno dos polígonos
-            map.addLayer({
-                id: 'poligonos-line',
-                type: 'line',
-                source: 'poligonos',                
-                paint: {
-                    'line-color': 'rgb(0,0,0)',
-                    'line-width': [
-                        'case',
-                        ['boolean', ['feature-state', 'hover'], false],
-                        0.8,
-                        1
-                    ]
-                }
-            })
+            // map.addLayer({
+            //     id: 'poligonos-line',
+            //     type: 'line',
+            //     source: 'poligonos',                
+            //     paint: {
+            //         'line-color': 'rgb(0,0,0)',
+            //         'line-width': [
+            //             'case',
+            //             ['boolean', ['feature-state', 'hover'], false],
+            //             0.8,
+            //             1
+            //         ]
+            //     }
+            // })
 
-            //  Adiciona layer de título dos polígonos zzzz
+                map.addLayer({
+                    id: "markers",
+                    type: "symbol",
+                    source: "refinarias",                              
+                    paint: {
+                        "icon-color": "rgb(189, 28, 178)", //só funciona para icones no formato SDF
+    
+    
+                    },
+                    layout: {
+                        'icon-image': 'refinery',
+                        'icon-size': 0.1,
+                        'visibility': 'visible'
+                    }
+                });
+            // pescadores
             map.addLayer({
-                id: "labels",
+                id: "markers2",
                 type: "symbol",
-                source: "poligonos-label",                              
+                source: "pescadores",                              
                 paint: {
                     "text-color": "#fff"
                 },
                 layout: {
-                    'text-field':['get', 'name'],
-                    "text-anchor": "center",
-                    "icon-allow-overlap": true
+                    'icon-image': 'pescadores-icon',
+                    'icon-size': 0.1    ,
+                    'icon-ignore-placement': true,
+                    'visibility': 'visible'
                 }
             });
+
+            map.addLayer({
+                id: "markers3",
+                type: "symbol",
+                source: "ilhas",                              
+                paint: {
+                    "text-color": "#fff"
+                },
+                layout: {
+                    'icon-image': 'island',
+                    'icon-size': 0.1    ,
+                    'icon-ignore-placement': true,
+                    'visibility': 'visible'
+                }
+            });
+
+            map.addLayer({
+                id: "markers4",
+                type: "symbol",
+                source: "entidades",                              
+                paint: {
+                    "text-color": "#fff"
+                },
+                layout: {
+                    'icon-image': 'entidades-icon',
+                    'icon-size': 0.1    ,
+                    'icon-ignore-placement': true,
+                    'visibility': 'visible'
+                }
+            });
+
+            map.addLayer({
+                id: "markers5",
+                type: "symbol",
+                source: "estaleiros",                              
+                paint: {
+                    "text-color": "#fff"
+                },
+                layout: {
+                    'icon-image': 'shipyard',
+                    'icon-size': 0.1    ,
+                    'visibility': 'visible'
+                }
+            });
+
+            //  Adiciona layer de título dos polígonos zzzz
+            // map.addLayer({
+            //     id: "labels",
+            //     type: "symbol",
+            //     source: "poligonos-label",                              
+            //     paint: {
+            //         "text-color": "#fff"
+            //     },
+            //     layout: {
+            //         'text-field':['get', 'name'],
+            //         "text-anchor": "center",
+            //         "icon-allow-overlap": true
+            //     }
+            // });
 
             // Adiciona layer de markers
             map.loadImage(
@@ -200,6 +332,44 @@ export default {
                 }
             );
             map.loadImage(
+                island,
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('island', image);
+                }
+            );
+            
+            map.loadImage(
+                refinariaIcon,
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('refinery', image);
+                }
+            );
+            map.loadImage(
+                pescadoresIcon,
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('pescadores-icon', image);
+                }
+            );
+            map.loadImage(
+                entidadesIcon,
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('entidades-icon', image);
+                }
+            );
+
+            map.loadImage(
+                shipyard,
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('shipyard', image);
+                }
+            );
+            
+            map.loadImage(
                 oilDrop,
                 (error, image) => {
                     if (error) throw error;
@@ -207,32 +377,14 @@ export default {
                 }
             );
 
-            map.addLayer({
-                id: "markers",
-                type: "symbol",
-                source: "marcadores",                              
-                paint: {
-                    "icon-color": "rgb(189, 28, 178)", //só funciona para icones no formato SDF
-
-
-                },
-                layout: {
-                    'icon-image': 'oil-icon',
-                    'icon-size': 0.7,
-                    'icon-ignore-placement': true
-                    
-                }
-            });
         },
         openteste(data){
             this.opentestecontent = data;
             this.opentestekey = !this.opentestekey
         },
         onMapLoaded(event) {
-            console.log('event', event)
-            console.log('map', map)
             map = event.map
-            
+            this.loadData()
 
             let hoveredStateId = null;
             //  MOUSE ENTER
@@ -272,6 +424,18 @@ export default {
             map.on('click', 'markers', (e) => {
                 this.openInfoBox(e.features[0])
             });
+            map.on('click', 'markers2', (e) => {
+                this.openInfoBox(e.features[0])
+            });
+            map.on('click', 'markers3', (e) => {
+                this.openInfoBox(e.features[0])
+            });
+            map.on('click', 'markers4', (e) => {
+                this.openInfoBox(e.features[0])
+            });
+            map.on('click', 'markers5', (e) => {
+                this.openInfoBox(e.features[0])
+            });
 
 
             map.on('mousemove', 'markers', (e) => {
@@ -283,21 +447,73 @@ export default {
             map.on('mouseleave', 'markers', () => {
                 map.getCanvas().style.cursor = ''
             })
+            map.on('mousemove', 'markers2', (e) => {
+                if (e.features.length > 0) {
+                    map.getCanvas().style.cursor = e.features.length ? 'pointer' : '';
+                }
+            })
+
+            map.on('mouseleave', 'markers2', () => {
+                map.getCanvas().style.cursor = ''
+            })
+
+            map.on('mousemove', 'markers3', (e) => {
+                if (e.features.length > 0) {
+                    map.getCanvas().style.cursor = e.features.length ? 'pointer' : '';
+                }
+            })
+
+            map.on('mouseleave', 'markers3', () => {
+                map.getCanvas().style.cursor = ''
+            })
+
+            map.on('mousemove', 'markers4', (e) => {
+                if (e.features.length > 0) {
+                    map.getCanvas().style.cursor = e.features.length ? 'pointer' : '';
+                }
+            })
+
+            map.on('mouseleave', 'markers4', () => {
+                map.getCanvas().style.cursor = ''
+            })
+
+            map.on('mousemove', 'markers5', (e) => {
+                if (e.features.length > 0) {
+                    map.getCanvas().style.cursor = e.features.length ? 'pointer' : '';
+                }
+            })
+
+            map.on('mouseleave', 'markers5', () => {
+                map.getCanvas().style.cursor = ''
+            })
 
         },
         openInfoBox(feature){ 
             console.log(`feature`, feature)
             this.opentestecontent = feature.properties.description ? feature.properties.description : feature.properties.impacts
+            if (!this.opentestecontent) this.opentestecontent = feature.properties.Name
             this.opentestekey = true;  
         },
         changeStyle(){
             this.mapStyle = this.mapStyle == this.styleSatellite ?  this.styleOutdoors : this.styleSatellite;
         }
     },
+    watch:{
+        layers:{
+            handler(newVal, oldVal){
+                console.log(`newVal`, newVal)
+                console.log(`oldVal`, oldVal)
+                if (newVal == false){
+
+                }
+            },
+            deep: true
+        }
+    },
     async mounted(){
-        const response = await axios.get('https://guanabara-backend.herokuapp.com/location-points')
-        this.responseData = response.data;
-        this.loadData();
+        // const response = await axios.get('https://guanabara-backend.herokuapp.com/location-points')
+        // this.responseData = response.data;
+        // this.loadData();
 
         // this.markers = response.data.map(item =>{
         //     let photos;
@@ -344,7 +560,11 @@ export default {
 }
 </script>
 <style scoped>
-
+.header-info{
+    height: 200px;
+    width: 100%;
+    
+}
 .mapboxgl-popup-content{
     padding: 0px !important;
 }
@@ -363,6 +583,9 @@ export default {
 }
 .layers-container{
     position: absolute;
+    height: 99%;
+    max-width: 20vw;
+    width: 20vw;
     left: 0;
     z-index: 5;
     background-color: rgba(255,255,255);
