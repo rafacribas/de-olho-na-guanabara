@@ -1,0 +1,329 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "id": 1,
+            "type": "Feature",
+            "properties": {
+                "Name": "ALPAGP - Associação Livre dos Pescadores Artesanais de Guia de Pacobaíba",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.183097,
+                    -22.716378,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "type": "Feature",
+            "properties": {
+                "Name": "APESCASIRILUZ - Associação de Pescadores e Escarnadeiras de Siri da Praia da Luz",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.07420921816611,
+                    -22.78395390492331,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "type": "Feature",
+            "properties": {
+                "Name": "Associação Colônia de Pesca de Caxias",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.13767819454962,
+                    -22.70993949369292,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "type": "Feature",
+            "properties": {
+                "Name": "Associação de Caranguejeiros e Amigos dos Mangues de Magé – ACAMM",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.12066,
+                    -22.658854,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "type": "Feature",
+            "properties": {
+                "Name": "Associação de Moradores e Amigos da Ilha de Itaoca – AMAII",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.062854,
+                    -22.781422,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "type": "Feature",
+            "properties": {
+                "Name": "Associação de Moradores Pescadores do Bairro Porto Velho e suas Praias – AMPOVEP",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.09632,
+                    -22.831537,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "type": "Feature",
+            "properties": {
+                "Name": "Associação de Pescadores da Praia dos Bancários -  APELONEAS",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.187558,
+                    -22.78425,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "type": "Feature",
+            "properties": {
+                "Name": "Associação de Pescadores de Itambi – ITAPESCA",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -42.958548,
+                    -22.728024,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 9,
+            "type": "Feature",
+            "properties": {
+                "Name": "Associação de Pescadores do Cais do Chatão",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.114246,
+                    -22.867378,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 10,
+            "type": "Feature",
+            "properties": {
+                "Name": "Associação de Pescadores e Amigos de São Pedro – APASP",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.125939,
+                    -22.891395,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 11,
+            "type": "Feature",
+            "properties": {
+                "Name": "Colônia de Pescadores   Z-12",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.22353,
+                    -22.876096,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 12,
+            "type": "Feature",
+            "properties": {
+                "Name": "CONFAPESCA - Confederação Nacional de Federações das Associações de Pescadores Artesanais e Aquicultores e de Organizações da Pesca",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.11389305946102,
+                    -22.93290516476807,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 13,
+            "type": "Feature",
+            "properties": {
+                "Name": "Federação das Associações de Pescadores Artesanais do Rio de janeiro - FAPESCA",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.11374,
+                    -22.93326,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 14,
+            "type": "Feature",
+            "properties": {
+                "Name": "Federação de Pescadores do Estado do Rio de Janeiro – FEPERJ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.12598576636216,
+                    -22.88534207572774,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 15,
+            "type": "Feature",
+            "properties": {
+                "Name": "MARCOOP - Cooperativa de Pescadores Marcilio Dias",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.269066,
+                    -22.819227,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 16,
+            "type": "Feature",
+            "properties": {
+                "Name": "SAPERJ - Sindicato dos Armadores de Pesca do Estado do Rio de Janeiro",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.10236,
+                    -22.868909,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 17,
+            "type": "Feature",
+            "properties": {
+                "Name": "Sindicato da Indústria do Pescado do Estado do Rio de Janeiro -  SIPERJ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.174154,
+                    -22.910769,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 18,
+            "type": "Feature",
+            "properties": {
+                "Name": "SINDPESCA-RJ - Sindicatos dos Pescadores Profissionais, Pescadores Artesanais do Estado do Rio de Janeiro",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.12486,
+                    -22.702751,
+                    0
+                ]
+            }
+        }
+    ]
+}

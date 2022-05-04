@@ -35,6 +35,8 @@ export default {
     data() {
         return { 
           error: false,
+          emails:['admin@guanabara.com','livia@guanabara.com','alexandre@guanabara.com'],
+          senhas:['admin123','admin'],
             user: {
                 email: 'admin@guanabara.com',
                 password: 'admin',
@@ -50,7 +52,7 @@ export default {
     },
     methods: {
       submitForm() {
-        if(this.inputEmail === 'admin@guanabara.com' && this.inputPassword === "admin"){
+        if (this.emails.includes(this.inputEmail) && this.senhas.includes(this.inputPassword)){ 
           window.sessionStorage.setItem('auth', true)
           window.location.assign('/app')
           

@@ -6,10 +6,21 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () =>import( '@/components/HomeIndex.vue')
-  },
-  {
-    path: '/app',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () =>import( '@/components/HomeIndex.vue')
+    },
+    {
+      path: '/teste',
+      name: 'Teste',
+          // route level code-splitting
+          // this generates a separate chunk (about.[hash].js) for this route
+          // which is lazy-loaded when the route is visited.
+          component: () =>import( '@/components/Teste.vue')
+      },
+    {
+      path: '/app',
     name: 'RouterView',
     component: () =>import( '@/views/RouterView.vue'),
     children: [
@@ -22,7 +33,7 @@ const routes = [
         component: () =>import( '@/components/campo/MapaCampo.vue')
       },
       {  
-        path: 'add',
+        path: '/app/add',
         name: 'Criar Ponto',    
         component: () => import( '@/components/campo/CriarPonto.vue'),
         children: [
@@ -52,16 +63,16 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.path != '/login' && to.path != '/'){
-    const existsSessionAuth = window.sessionStorage.getItem('auth')
+// router.beforeEach((to, from, next) => {
+//   if (to.path != '/login' && to.path != '/'){
+//     const existsSessionAuth = window.sessionStorage.getItem('auth')
 
-    if(existsSessionAuth === 'false' || !existsSessionAuth){
-      window.location.assign('/login')
-    }
+//     if(existsSessionAuth === 'false' || !existsSessionAuth){
+//       window.location.assign('/login')
+//     }
       
-  }
-  next()
-})
+//   }
+//   next()
+// })
 
 export default router

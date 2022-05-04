@@ -1,66 +1,149 @@
 <template>
-    <v-container class="pa-0" fluid style="height:100%">      
-      <router-view style="height:100%"/>
-      <MglMap  class="mapa" :accessToken="accessToken" :mapStyle="mapStyle" :center="center" :zoom="zoom" > 
-          <MglGeolocateControl :positionOptions="positionOptions" trackUserLocation position="top-right"/>
-          <MglMarker v-for="marker in markers" :key="marker.index" :coordinates="marker.coord" color="blue">
-            <MglPopup :coordinates="marker.coord">
-            <div>
-                <h3>{{marker.categories}}</h3>
-                <div v-if="marker.elements" class="d-flex justify-center">                        
-                    <h5 v-for="(element, index) in marker.elements" :key="element + index">{{element}}</h5>
+    <v-container class="pa-0" fluid style="height:100%">
+        <router-view style="height:100%"/>
+        
+                <div class="style-container">             
+                    <v-btn large @click="changeStyle()" icon> <v-icon :color="isSatellite ? 'blue' : ''">mdi-satellite-variant</v-icon></v-btn> <br>   
                 </div>
-                <v-carousel
-                    cycle
-                    v-if="marker.img.length > 1"
-                    height="200"
-                    hide-delimiter-background
-                >
-                    <v-carousel-item
-                        v-for="(slide, i) in marker.img"
-                        :key="i"
-                        :src="slide"
-                    />
-                </v-carousel>
-                <v-img v-else :src="marker.img[0]"></v-img>
-                <ul>
-                    <li v-for="(impact, index) in marker.impacts" :key="impact + index">{{impact}}</li>
-                </ul>  
-            </div>
-            </MglPopup>
-          </MglMarker>
-      </MglMap>
+                <div>                        
+                    <div class="layers-container hidden-sm-and-down" style="z-index:2">
+                        <v-list rounded class="mb-4">
+                            <v-list-item v-for="(layer, index) in layers" :key="index">
+                                <v-checkbox
+                                    @click="mapShow(layer.value)"
+                                    v-model="layer.visibility"
+                                    :label="layer.name"
+                                    hide-details
+                                > </v-checkbox>
+                            </v-list-item>
+
+                        </v-list>
+                    </div>
+                    <v-dialog v-model="dialog">
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                            icon
+                            large
+                            rounded
+                            class="hidden-md-and-up legend-container"
+                            v-bind="attrs"
+                            v-on="on"
+                            >
+                            <v-icon>mdi-filter</v-icon>
+
+                            </v-btn>
+                        </template>               
+                    <v-card>
+                        <v-card-title class="headline">Filtrar marcadores</v-card-title>
+                        <v-list rounded>
+                            <v-list-item v-for="(layer, index) in layers" :key="index">
+                                <v-checkbox
+                                    @click="mapShow(layer.value)"
+                                    v-model="layer.visibility"
+                                    :label="layer.name"
+                                    hide-details
+                                > </v-checkbox>
+                            </v-list-item>
+                            <v-card-actions class=" pa-0 d-flex justify-end">
+                                <v-btn text @click="dialog =false">
+                                    Fechar
+                                </v-btn></v-card-actions>
+                        </v-list>
+                    </v-card>
+                    </v-dialog>
+
+                </div>
+                <MglMap 
+                    @click="opentestekey=false"
+                    @load="onMapLoaded"
+                    class="mapa"
+                    :accessToken="accessToken"
+                    :mapStyle="mapStyle"
+                    :center="center"
+                    :zoom="zoom"
+                    > 
+
+                    <MglMarker v-for="marker in markers" :key="marker.index" :coordinates="marker.coord" color="blue">
+                        <MglPopup :coordinates="marker.coord">
+                        <div>
+                            <h3>{{marker.categories}}</h3>
+                            <div v-if="marker.elements" class="d-flex justify-center">                        
+                                <h5 v-for="(element, index) in marker.elements" :key="element + index">{{element}}</h5>
+                            </div>
+                            <v-carousel
+                                cycle
+                                v-if="marker.img.length > 1"
+                                height="200"
+                                hide-delimiter-background
+                            >
+                                <v-carousel-item
+                                    v-for="(slide, i) in marker.img"
+                                    :key="i"
+                                    :src="slide"
+                                />
+                            </v-carousel>
+                            <v-img v-else :src="marker.img[0]"></v-img>
+                            <ul>
+                                <li v-for="(impact, index) in marker.impacts" :key="impact + index">{{impact}}</li>
+                            </ul>  
+                        </div>
+                        </MglPopup>
+                    </MglMarker>
+                </MglMap>
+
+
     </v-container>
     
 </template>
 
 <script>
-import Mapbox from "mapbox-gl";
-import { MglMap, MglGeolocateControl, MglMarker,MglPopup } from "vue-mapbox";
-import { EventBus } from '@/event-bus';
+/* eslint-disable vue/no-unused-components */
+/* eslint-disable vue/no-unused-vars */
+
+import estaleiros from '../assets/estaleiros.geojson'
+import pescadores from '../assets/pescadores.geojson'
+import ilhas from '../assets/ilhas.geojson'
+import entidades from '../assets/entidades.geojson'
+import refinarias from '../assets/refinarias.geojson'
+import { MglMap, MglMarker,MglPopup, MglGeojsonLayer } from "vue-mapbox";
+import marcadores from '../assets/marcadores.geojson'
+import Mapbox from 'mapbox-gl'
+ // eslint-disable-next-line no-unused-vars
 import axios from 'axios'
+ // eslint-disable-next-line no-unused-vars
+/* eslint-disable vue/no-unused-vars */
+import oilBarrel from '../assets/oil-barrel.png'
+import oilDrop from '../assets/oil-drop.png'
+import refinariaIcon from '../assets/refinery.png'
+import pescadoresIcon from '../assets/fishing-net.png'
+import island from '../assets/island.png'
+import entidadesIcon from '../assets/hands.png'
+import shipyard from '../assets/shipyard.png'
+
+let map = null;
+
 
 export default {
-  name: 'MapaCampo',
-  components: {
-    MglMap,
-    MglGeolocateControl,
-    MglMarker,
-    MglPopup
+    name: 'HomeIndex',
+    components: {
+        MglMap,
+        MglMarker,
+        MglPopup,
+        MglGeojsonLayer
     },
-  data() {
-    return {
-      accessToken: 'pk.eyJ1IjoicmFmYWNyaWJhcyIsImEiOiJjazloZ3R0aW0weWIxM2ZwOWl2bTZ5aHhrIn0.q8zXHOGQxnHffPu-T6L85A',
-      mapStyle: 'mapbox://styles/rafacribas/cl1ye632t001j14ms7r26m9md',
-      isLoading: false,
-      zoom: 11,
-      positionOptions: { enableHighAccuracy: true, timeout: 1500},
-      coordCampo: [],
-      center: [-43.12725,-22.81692],
-      markers: []
-    };
-  },
-  methods:{
+    data() {
+        return {
+        accessToken: 'pk.eyJ1IjoicmFmYWNyaWJhcyIsImEiOiJjazloZ3R0aW0weWIxM2ZwOWl2bTZ5aHhrIn0.q8zXHOGQxnHffPu-T6L85A',
+        mapStyle: 'mapbox://styles/rafacribas/cl1ye632t001j14ms7r26m9md',
+        isLoading: false,
+        zoom: 11,
+        positionOptions: { enableHighAccuracy: true, timeout: 1500},
+        coordCampo: [],
+        center: [-43.12725,-22.81692],
+        markers: []
+        };
+    },
+    methods:{
     // showDetails(item) {
     // },
     // async onMapLoad(event) {
@@ -78,12 +161,461 @@ export default {
             }
     }
   },
-  created() {
+    computed:{        
+        isSatellite(){
+            return this.mapStyle == this.styleSatellite ? true : false
+        }
+    },
+    created() {
     // We need to set mapbox-gl library here in order to use it in template
-    this.mapbox = Mapbox;
-  },
-  async mounted(){
-    const response = await axios.get('https://guanabara-backend.herokuapp.com/location-points')
+        this.mapbox = Mapbox;
+    },
+    data(){
+        return {
+            dialog: false,
+            layers: [
+                {
+                    name: 'Refinarias',
+                    value: 'markers',
+                    visibility: true
+                },
+                {
+                    name: 'Pescadores',
+                    value: 'markers2',
+                    visibility: true
+                },
+                {
+                    name: 'Ilhas',
+                    value: 'markers3',
+                    visibility: true
+                },
+                {
+                    name: 'Entidades',
+                    value: 'markers4',
+                    visibility: true
+                },
+                {
+                    name: 'Estaleiros',
+                    value: 'markers5',
+                    visibility: true
+                }
+            ],
+            estaleiros: estaleiros,
+            marcadores:marcadores,
+            pescadores: pescadores,
+            ilhas: ilhas,
+            entidades: entidades,
+            refinarias: refinarias,
+            responseData: null,
+            opentestekey: false,
+            opentestecontent: '',
+            accessToken: 'pk.eyJ1IjoicmFmYWNyaWJhcyIsImEiOiJjazloZ3R0aW0weWIxM2ZwOWl2bTZ5aHhrIn0.q8zXHOGQxnHffPu-T6L85A',
+            mapStyle: 'mapbox://styles/rafacribas/cl1ye632t001j14ms7r26m9md',
+            styleOutdoors: 'mapbox://styles/rafacribas/cl1ye632t001j14ms7r26m9md',
+            styleSatellite: 'mapbox://styles/mapbox/satellite-streets-v11',
+            center: [-43.12725,-22.81692],
+            zoom: 12,
+            markers: [],
+            coordCampo: []           
+        }
+    },
+    methods:{    
+        adicionarIds(){
+            const arr = [
+
+                    {
+                        "type": "Feature",
+                        "properties": {
+                            "Name": "Viaduto sobre o Rio Suruí do sistema de dutos do (COMPERJ), ",
+                            "tessellate": -1,
+                            "extrude": 0,
+                            "visibility": -1
+                        },
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [
+                            -43.11684270589647,
+                            -22.67124964167459,
+                            0
+                            ]
+                        }
+                        },
+                        {
+                        "type": "Feature",
+                        "properties": {
+                            "Name": "WHITE MARTINS Gases Industriais",
+                            "tessellate": -1,
+                            "extrude": 0,
+                            "visibility": -1
+                        },
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [
+                            -43.25375,
+                            -22.709167,
+                            0
+                            ]
+                        }
+                        }
+            ];
+
+            for (let i = 0; i < arr.length; i++) {
+                arr[i]['id'] = i;
+                
+            }
+            console.log('arr', arr)
+            return arr;
+        },
+        mapShow(layerId){
+            const visibility =  map.getLayoutProperty(layerId,'visibility')
+            console.log(`visibility`, visibility)
+            let state = null;
+            state = visibility == 'visible' ? 'none' : 'visible'
+            map.setLayoutProperty(layerId, 'visibility', state);
+
+        },
+        loadData(){
+            if (map.getSource('pescadores')){
+                map.removeLayer('markers2')
+                map.removeSource('pescadores')
+            }
+            map.addSource('pescadores', {type:'geojson',data:this.pescadores})
+
+            if (map.getSource('refinarias')){
+                map.removeLayer('markers')
+                map.removeSource('refinarias')
+            }
+            map.addSource('refinarias', {type:'geojson', data:this.refinarias})
+
+            if (map.getSource('ilhas')){
+                map.removeLayer('markers3')
+                map.removeSource('ilhas')
+            }
+
+            map.addSource('ilhas', {type:'geojson', data:this.ilhas})
+
+            if (map.getSource('estaleiros')){
+                map.removeLayer('markers5')
+                map.removeSource('estaleiros')
+            }
+
+            map.addSource('estaleiros', {type:'geojson', data:this.estaleiros})
+
+            if (map.getSource('entidades')){
+                map.removeLayer('markers4')
+                map.removeSource('entidades')
+            }
+
+            map.addSource('entidades', {type:'geojson', data:this.entidades})    
+
+                map.addLayer({
+                    id: "markers",
+                    type: "symbol",
+                    source: "refinarias",                              
+                    paint: {
+                        "icon-color": "rgb(189, 28, 178)", //só funciona para icones no formato SDF
+    
+    
+                    },
+                    layout: {
+                        'icon-image': 'refinery',
+                        'icon-size': 0.1,
+                        'visibility': 'visible'
+                    }
+                });
+            // pescadores
+            map.addLayer({
+                id: "markers2",
+                type: "symbol",
+                source: "pescadores",                              
+                paint: {
+                    "text-color": "#fff"
+                },
+                layout: {
+                    'icon-image': 'pescadores-icon',
+                    'icon-size': 0.1    ,
+                    'icon-ignore-placement': true,
+                    'visibility': 'visible'
+                }
+            });
+
+            map.addLayer({
+                id: "markers3",
+                type: "symbol",
+                source: "ilhas",                              
+                paint: {
+                    "text-color": "#fff"
+                },
+                layout: {
+                    'icon-image': 'island',
+                    'icon-size': 0.1    ,
+                    'icon-ignore-placement': true,
+                    'visibility': 'visible'
+                }
+            });
+
+            map.addLayer({
+                id: "markers4",
+                type: "symbol",
+                source: "entidades",                              
+                paint: {
+                    "text-color": "#fff"
+                },
+                layout: {
+                    'icon-image': 'entidades-icon',
+                    'icon-size': 0.1    ,
+                    'icon-ignore-placement': true,
+                    'visibility': 'visible'
+                }
+            });
+
+            map.addLayer({
+                id: "markers5",
+                type: "symbol",
+                source: "estaleiros",                              
+                paint: {
+                    "text-color": "#fff"
+                },
+                layout: {
+                    'icon-image': 'shipyard',
+                    'icon-size': 0.1    ,
+                    'visibility': 'visible'
+                }
+            });
+
+            // Adiciona layer de markers
+            map.loadImage(
+                oilBarrel,
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('oil-icon', image);
+                }
+            );
+            map.loadImage(
+                island,
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('island', image);
+                }
+            );
+            
+            map.loadImage(
+                refinariaIcon,
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('refinery', image);
+                }
+            );
+            map.loadImage(
+                pescadoresIcon,
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('pescadores-icon', image);
+                }
+            );
+            map.loadImage(
+                entidadesIcon,
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('entidades-icon', image);
+                }
+            );
+
+            map.loadImage(
+                shipyard,
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('shipyard', image);
+                }
+            );
+            
+            map.loadImage(
+                oilDrop,
+                (error, image) => {
+                    if (error) throw error;
+                    map.addImage('oil-drop', image);
+                }
+            );
+
+        },
+        openteste(data){
+            this.opentestecontent = data;
+            this.opentestekey = !this.opentestekey
+        },
+        onMapLoaded(event) {
+            map = event.map
+            this.loadData()
+
+            map.on('click', 'markers', (e) => {
+                this.openInfoBox(e.features[0])
+            });
+            map.on('click', 'markers2', (e) => {
+                this.openInfoBox(e.features[0])
+            });
+            map.on('click', 'markers3', (e) => {
+                this.openInfoBox(e.features[0])
+            });
+            map.on('click', 'markers4', (e) => {
+                this.openInfoBox(e.features[0])
+            });
+            map.on('click', 'markers5', (e) => {
+                this.openInfoBox(e.features[0])
+            });
+
+
+            map.on('mousemove', 'markers', (e) => {
+                if (e.features.length > 0) {
+                    map.getCanvas().style.cursor = e.features.length ? 'pointer' : '';
+                }
+            })
+
+            map.on('mouseleave', 'markers', () => {
+                map.getCanvas().style.cursor = ''
+            })
+            map.on('mousemove', 'markers2', (e) => {
+                if (e.features.length > 0) {
+                    map.getCanvas().style.cursor = e.features.length ? 'pointer' : '';
+                }
+            })
+
+            map.on('mouseleave', 'markers2', () => {
+                map.getCanvas().style.cursor = ''
+            })
+
+            map.on('mousemove', 'markers3', (e) => {
+                if (e.features.length > 0) {
+                    map.getCanvas().style.cursor = e.features.length ? 'pointer' : '';
+                }
+            })
+
+            map.on('mouseleave', 'markers3', () => {
+                map.getCanvas().style.cursor = ''
+            })
+
+            map.on('mousemove', 'markers4', (e) => {
+                if (e.features.length > 0) {
+                    map.getCanvas().style.cursor = e.features.length ? 'pointer' : '';
+                }
+            })
+
+            map.on('mouseleave', 'markers4', () => {
+                map.getCanvas().style.cursor = ''
+            })
+
+            map.on('mousemove', 'markers5', (e) => {
+                if (e.features.length > 0) {
+                    map.getCanvas().style.cursor = e.features.length ? 'pointer' : '';
+                }
+            })
+
+            map.on('mouseleave', 'markers5', () => {
+                map.getCanvas().style.cursor = ''
+            })
+
+            map.on('click', 'markers', (e) => {
+
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const description = e.features[0].properties.Name;
+
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+                var htmlpopup = `<div style="font-size:18px;font-family:Roboto;padding:4px 6px">${description}</div>`
+
+                new Mapbox.Popup({className: 'popup-class'})
+                .setLngLat(coordinates)
+                .setHTML(htmlpopup)
+                .addTo(map);
+
+
+            });
+            map.on('click', 'markers2', (e) => {
+
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const description = e.features[0].properties.Name;
+
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+                var htmlpopup = `<div style="font-size:18px;font-family:Roboto;padding:4px 6px">${description}</div>`
+
+                new Mapbox.Popup({className: 'popup-class'})
+                .setLngLat(coordinates)
+                .setHTML(htmlpopup)
+                .addTo(map);
+
+
+            });
+            map.on('click', 'markers3', (e) => {
+
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const description = e.features[0].properties.Name;
+
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+                var htmlpopup = `<div style="font-size:18px;font-family:Roboto;padding:4px 6px">${description}</div>`
+
+                new Mapbox.Popup({className: 'popup-class'})
+                .setLngLat(coordinates)
+                .setHTML(htmlpopup)
+                .addTo(map);
+
+
+            });
+            map.on('click', 'markers4', (e) => {
+
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const description = e.features[0].properties.Name;
+
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+                var htmlpopup = `<div style="font-size:18px;font-family:Roboto;padding:4px 6px">${description}</div>`
+
+                new Mapbox.Popup({className: 'popup-class'})
+                .setLngLat(coordinates)
+                .setHTML(htmlpopup)
+                .addTo(map);
+
+
+            });
+            map.on('click', 'markers5', (e) => {
+
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const description = e.features[0].properties.Name;
+
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+                var htmlpopup = `<div style="font-size:18px;font-family:Roboto;padding:4px 6px">${description}</div>`
+
+                new Mapbox.Popup({className: 'popup-class'})
+                .setLngLat(coordinates)
+                .setHTML(htmlpopup)
+                .addTo(map);
+
+
+            });
+
+
+        },
+        openInfoBox(feature){ 
+            this.opentestecontent = feature.properties.description ? feature.properties.description : feature.properties.impacts
+            if (!this.opentestecontent) this.opentestecontent = feature.properties.Name
+            this.opentestekey = true;  
+        },
+        async changeStyle(){
+            this.mapStyle = this.mapStyle == this.styleSatellite ?  this.styleOutdoors : this.styleSatellite;
+            //TODO: arrumar mapa perdendo  layer degeojson quando troca de style    
+            // await map.setStyle(this.styleSatellite)
+            // this.loadData();
+        }
+    },
+    async mounted(){
+        const response = await axios.get('https://guanabara-backend.herokuapp.com/location-points')
+        this.responseData = response.data;
+
         this.markers = response.data.map(item =>{
             let photos;
             if(item.photo.length)
@@ -99,21 +631,55 @@ export default {
                 'categories': item.categories
             }
             return obj
-        })
-  }
-};
+        })  
+        
+    }
+}
 </script>
 <style scoped>
-.popup{
-    padding:8px 8px 4px 8px;
+.popup-class{
+    background-color:blue !important;
+    width:200px;
+    font-size: 28px;
 }
-
+.header-info{
+    height: 200px;
+    width: 100%;
+    
+}
 .mapboxgl-popup-content{
     padding: 0px !important;
 }
 
 .v-carousel {
     margin: 10px 0px;
+}
+
+.style-container{
+    position: absolute;
+    right: 0;
+    z-index: 5;
+    background-color: rgba(255,255,255);
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.legend-container{
+    position: absolute;
+    left: 0;
+    z-index: 5;
+    background-color: rgba(255,255,255);
+    border-radius: 10px;
+    margin: 5px;
+}
+.layers-container{
+    background-color:red;
+    position: absolute;
+    left: 0;
+    z-index: 5;
+    background-color: rgba(255,255,255);
+    border-radius: 10px;
+    margin: 5px;
 }
 
 </style>

@@ -1,0 +1,221 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "id": 1,
+            "type": "Feature",
+            "properties": {
+                "Name": "Base PETROBRAS BANIT",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.116279,
+                    -22.867295,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "type": "Feature",
+            "properties": {
+                "Name": "ENAVAL engenharia Naval e Offshore",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.121409,
+                    -22.880358,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "type": "Feature",
+            "properties": {
+                "Name": "Estaleiro ALIANÇA",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.10827,
+                    -22.865001,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "type": "Feature",
+            "properties": {
+                "Name": "Estaleiro BRASA, Ilha do Caju, Niterói",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.121843,
+                    -22.875237,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "type": "Feature",
+            "properties": {
+                "Name": "Estaleiro CASSINU",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.088784,
+                    -22.824194,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "type": "Feature",
+            "properties": {
+                "Name": "Estaleiro EISA, Ilha do Governador",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.18921,
+                    -22.787124,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "type": "Feature",
+            "properties": {
+                "Name": "Estaleiro ENAVI, Barreto",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.10772255725767,
+                    -22.86273635131096,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "type": "Feature",
+            "properties": {
+                "Name": "Estaleiro Inhaúma – PETTROBRAS",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.209778,
+                    -22.874179,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 9,
+            "type": "Feature",
+            "properties": {
+                "Name": "Estaleiro MAUÁ S.A",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.128685,
+                    -22.877203,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 10,
+            "type": "Feature",
+            "properties": {
+                "Name": "Estaleiro RENAVI, Ilha do Viana",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.12798279636976,
+                    -22.86407561422828,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 11,
+            "type": "Feature",
+            "properties": {
+                "Name": "MAC LAREN Ilha da Conceição",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.121622,
+                    -22.870236,
+                    0
+                ]
+            }
+        },
+        {
+            "id": 12,
+            "type": "Feature",
+            "properties": {
+                "Name": "Wilson Sons - Bases de Apoio Offshore ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.122427,
+                    -22.872509,
+                    0
+                ]
+            }
+        }
+    ]
+}
