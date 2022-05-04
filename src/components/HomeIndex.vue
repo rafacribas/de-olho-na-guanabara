@@ -2,94 +2,94 @@
     <v-container class="pa-0" fluid style="height:100%">
         <router-view style="height:100%"/>
         
-                <div class="style-container">             
-                    <v-btn large @click="changeStyle()" icon> <v-icon :color="isSatellite ? 'blue' : ''">mdi-satellite-variant</v-icon></v-btn> <br>   
+            <div class="style-container">             
+                <v-btn large @click="changeStyle()" icon> <v-icon :color="isSatellite ? 'blue' : ''">mdi-satellite-variant</v-icon></v-btn> <br>   
+            </div>
+            <div>                        
+                <div class="layers-container hidden-sm-and-down" style="z-index:2">
+                    <v-list rounded class="mb-4">
+                        <v-list-item v-for="(layer, index) in layers" :key="index">
+                            <v-checkbox
+                                @click="mapShow(layer.value)"
+                                v-model="layer.visibility"
+                                :label="layer.name"
+                                hide-details
+                            > </v-checkbox>
+                        </v-list-item>
+
+                    </v-list>
                 </div>
-                <div>                        
-                    <div class="layers-container hidden-sm-and-down" style="z-index:2">
-                        <v-list rounded class="mb-4">
-                            <v-list-item v-for="(layer, index) in layers" :key="index">
-                                <v-checkbox
-                                    @click="mapShow(layer.value)"
-                                    v-model="layer.visibility"
-                                    :label="layer.name"
-                                    hide-details
-                                > </v-checkbox>
-                            </v-list-item>
+                <v-dialog v-model="dialog">
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                        icon
+                        large
+                        rounded
+                        class="hidden-md-and-up legend-container"
+                        v-bind="attrs"
+                        v-on="on"
+                        >
+                        <v-icon>mdi-filter</v-icon>
 
-                        </v-list>
-                    </div>
-                    <v-dialog v-model="dialog">
-                        <template v-slot:activator="{ on, attrs }">
-                            <v-btn
-                            icon
-                            large
-                            rounded
-                            class="hidden-md-and-up legend-container"
-                            v-bind="attrs"
-                            v-on="on"
-                            >
-                            <v-icon>mdi-filter</v-icon>
+                        </v-btn>
+                    </template>               
+                <v-card>
+                    <v-card-title class="headline">Filtrar marcadores</v-card-title>
+                    <v-list rounded>
+                        <v-list-item v-for="(layer, index) in layers" :key="index">
+                            <v-checkbox
+                                @click="mapShow(layer.value)"
+                                v-model="layer.visibility"
+                                :label="layer.name"
+                                hide-details
+                            > </v-checkbox>
+                        </v-list-item>
+                        <v-card-actions class=" pa-0 d-flex justify-end">
+                            <v-btn text @click="dialog =false">
+                                Fechar
+                            </v-btn></v-card-actions>
+                    </v-list>
+                </v-card>
+                </v-dialog>
 
-                            </v-btn>
-                        </template>               
-                    <v-card>
-                        <v-card-title class="headline">Filtrar marcadores</v-card-title>
-                        <v-list rounded>
-                            <v-list-item v-for="(layer, index) in layers" :key="index">
-                                <v-checkbox
-                                    @click="mapShow(layer.value)"
-                                    v-model="layer.visibility"
-                                    :label="layer.name"
-                                    hide-details
-                                > </v-checkbox>
-                            </v-list-item>
-                            <v-card-actions class=" pa-0 d-flex justify-end">
-                                <v-btn text @click="dialog =false">
-                                    Fechar
-                                </v-btn></v-card-actions>
-                        </v-list>
-                    </v-card>
-                    </v-dialog>
+            </div>
+            <MglMap 
+                @click="opentestekey=false"
+                @load="onMapLoaded"
+                class="mapa"
+                :accessToken="accessToken"
+                :mapStyle="mapStyle"
+                :center="center"
+                :zoom="zoom"
+                > 
 
-                </div>
-                <MglMap 
-                    @click="opentestekey=false"
-                    @load="onMapLoaded"
-                    class="mapa"
-                    :accessToken="accessToken"
-                    :mapStyle="mapStyle"
-                    :center="center"
-                    :zoom="zoom"
-                    > 
-
-                    <MglMarker v-for="marker in markers" :key="marker.index" :coordinates="marker.coord" color="blue">
-                        <MglPopup :coordinates="marker.coord">
-                        <div>
-                            <h3>{{marker.categories}}</h3>
-                            <div v-if="marker.elements" class="d-flex justify-center">                        
-                                <h5 v-for="(element, index) in marker.elements" :key="element + index">{{element}}</h5>
-                            </div>
-                            <v-carousel
-                                cycle
-                                v-if="marker.img.length > 1"
-                                height="200"
-                                hide-delimiter-background
-                            >
-                                <v-carousel-item
-                                    v-for="(slide, i) in marker.img"
-                                    :key="i"
-                                    :src="slide"
-                                />
-                            </v-carousel>
-                            <v-img v-else :src="marker.img[0]"></v-img>
-                            <ul>
-                                <li v-for="(impact, index) in marker.impacts" :key="impact + index">{{impact}}</li>
-                            </ul>  
+                <MglMarker v-for="marker in markers" :key="marker.index" :coordinates="marker.coord" color="blue">
+                    <MglPopup :coordinates="marker.coord">
+                    <div>
+                        <h3>{{marker.categories}}</h3>
+                        <div v-if="marker.elements" class="d-flex justify-center">                        
+                            <h5 v-for="(element, index) in marker.elements" :key="element + index">{{element}}</h5>
                         </div>
-                        </MglPopup>
-                    </MglMarker>
-                </MglMap>
+                        <v-carousel
+                            cycle
+                            v-if="marker.img.length > 1"
+                            height="200"
+                            hide-delimiter-background
+                        >
+                            <v-carousel-item
+                                v-for="(slide, i) in marker.img"
+                                :key="i"
+                                :src="slide"
+                            />
+                        </v-carousel>
+                        <v-img v-else :src="marker.img[0]"></v-img>
+                        <ul>
+                            <li v-for="(impact, index) in marker.impacts" :key="impact + index">{{impact}}</li>
+                        </ul>  
+                    </div>
+                </MglPopup>
+            </MglMarker>
+        </MglMap>
 
 
     </v-container>
@@ -99,7 +99,6 @@
 <script>
 /* eslint-disable vue/no-unused-components */
 /* eslint-disable vue/no-unused-vars */
-
 import estaleiros from '../assets/estaleiros.geojson'
 import pescadores from '../assets/pescadores.geojson'
 import ilhas from '../assets/ilhas.geojson'
@@ -130,37 +129,7 @@ export default {
         MglMarker,
         MglPopup,
         MglGeojsonLayer
-    },
-    data() {
-        return {
-        accessToken: 'pk.eyJ1IjoicmFmYWNyaWJhcyIsImEiOiJjazloZ3R0aW0weWIxM2ZwOWl2bTZ5aHhrIn0.q8zXHOGQxnHffPu-T6L85A',
-        mapStyle: 'mapbox://styles/rafacribas/cl1ye632t001j14ms7r26m9md',
-        isLoading: false,
-        zoom: 11,
-        positionOptions: { enableHighAccuracy: true, timeout: 1500},
-        coordCampo: [],
-        center: [-43.12725,-22.81692],
-        markers: []
-        };
-    },
-    methods:{
-    // showDetails(item) {
-    // },
-    // async onMapLoad(event) {
-    // },
-    getUserLocation(){
-        this.isLoading = true;
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((data) => {
-                    this.coordCampo[0] = data.coords.longitude;
-                    this.coordCampo[1] = data.coords.latitude;     
-                    EventBus.$emit('ponto-campo', this.coordCampo)                               
-                    this.isLoading = false;
-                    this.$router.push('/app/add')
-                });
-            }
-    }
-  },
+    },  
     computed:{        
         isSatellite(){
             return this.mapStyle == this.styleSatellite ? true : false
@@ -220,52 +189,6 @@ export default {
         }
     },
     methods:{    
-        adicionarIds(){
-            const arr = [
-
-                    {
-                        "type": "Feature",
-                        "properties": {
-                            "Name": "Viaduto sobre o Rio Suruí do sistema de dutos do (COMPERJ), ",
-                            "tessellate": -1,
-                            "extrude": 0,
-                            "visibility": -1
-                        },
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [
-                            -43.11684270589647,
-                            -22.67124964167459,
-                            0
-                            ]
-                        }
-                        },
-                        {
-                        "type": "Feature",
-                        "properties": {
-                            "Name": "WHITE MARTINS Gases Industriais",
-                            "tessellate": -1,
-                            "extrude": 0,
-                            "visibility": -1
-                        },
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [
-                            -43.25375,
-                            -22.709167,
-                            0
-                            ]
-                        }
-                        }
-            ];
-
-            for (let i = 0; i < arr.length; i++) {
-                arr[i]['id'] = i;
-                
-            }
-            console.log('arr', arr)
-            return arr;
-        },
         mapShow(layerId){
             const visibility =  map.getLayoutProperty(layerId,'visibility')
             console.log(`visibility`, visibility)
