@@ -1,11 +1,195 @@
 {
-    "id" : 1,
-    "type":"FeatureCollection",
+    "id": 1,
+    "type": "FeatureCollection",
     "name": "pescadores",
-    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-    "features":[
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+    },
+    "features": [
         {
-            "id": 1,
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores da Colônia Z-10 (Ilha do Governador)",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.177212,
+                    -22.823028,
+                    0
+                ]
+            },
+            "id": 0
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores da Coroa de São Lourenço ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.122547,
+                    -22.711399,
+                    0
+                ]
+            },
+            "id": 1
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores da Favela Kelson’s ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.268976,
+                    -22.819035,
+                    0
+                ]
+            },
+            "id": 2
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores da Ilha de Itaóca ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.067297,
+                    -22.769054,
+                    0
+                ]
+            },
+            "id": 3
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores da Ponta da Areia ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.107949,
+                    -22.860846,
+                    0
+                ]
+            },
+            "id": 4
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores da Praia das Pedrinhas ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.072192,
+                    -22.810139,
+                    0
+                ]
+            },
+            "id": 5
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores da Praia dos Bancários / Apeloneas (Ilha do Governador) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.185996,
+                    -22.78468,
+                    0
+                ]
+            },
+            "id": 6
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores da Vila dos Pinheiros (Maré) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.232561,
+                    -22.867438,
+                    0
+                ]
+            },
+            "id": 7
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores de Jurujuba ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.113641,
+                    -22.93305,
+                    0
+                ]
+            },
+            "id": 8
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores de São Francisco ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.117327,
+                    -22.706906,
+                    0
+                ]
+            },
+            "id": 9
+        },
+        {
             "type": "Feature",
             "properties": {
                 "Name": "Comunidade de Pescadores do Bairro Barbuda ",
@@ -18,12 +202,84 @@
                 "coordinates": [
                     -43.029596,
                     -22.670886,
-                    0.0
+                    0
                 ]
-            }
+            },
+            "id": 10
         },
         {
-            "id": 2,
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores do Mercado de São Pedro ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.128956,
+                    -22.887447,
+                    0
+                ]
+            },
+            "id": 11
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores do Rio Roncador ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.050423,
+                    -22.661332,
+                    0
+                ]
+            },
+            "id": 12
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores e Barqueiros da Praia de Olaria ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.13730176211852,
+                    -22.71068809934929,
+                    0
+                ]
+            },
+            "id": 13
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores e Catadores de Caranguejos da Bacia de Itambí ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -42.961936,
+                    -22.724635,
+                    0
+                ]
+            },
+            "id": 14
+        },
+        {
             "type": "Feature",
             "properties": {
                 "Name": "Comunidade de Pescadores e Catadores de Caranguejos de Suruí ",
@@ -35,13 +291,1111 @@
                 "type": "Point",
                 "coordinates": [
                     -43.118604,
-                    -22.665138996686711,
-                    0.0
+                    -22.66513899668671,
+                    0
                 ]
-            }
+            },
+            "id": 15
         },
-        {   
-            "id": 3,
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores e Coraleiros da Praia da Piedade ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.06605441026163,
+                    -22.68748014353713,
+                    0
+                ]
+            },
+            "id": 16
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade de Pescadores e Coraleiros da Praia de Tubiacanga (Ilha do Governador) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.226454,
+                    -22.783784,
+                    0
+                ]
+            },
+            "id": 17
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade dos Pescadores da Praia da Luz ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.07596806063614,
+                    -22.78394771829159,
+                    0
+                ]
+            },
+            "id": 18
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade dos Pescadores de Saracuruna ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.236568,
+                    -22.680201,
+                    0
+                ]
+            },
+            "id": 19
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade Pesqueira do Ipiranga ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.181268,
+                    -22.720528,
+                    0
+                ]
+            },
+            "id": 20
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Comunidade Pesqueira do Porto Velho ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": 0
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.097016,
+                    -22.83242,
+                    0
+                ]
+            },
+            "id": 21
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Barqueiros do Fundão (Ilha do Fundão) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.242968,
+                    -22.837194,
+                    0
+                ]
+            },
+            "id": 22
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores da Boa Vista",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.05740198786356,
+                    -22.80544573834077,
+                    0
+                ]
+            },
+            "id": 23
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores da Favela de Ramos ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.246524,
+                    -22.84003,
+                    0
+                ]
+            },
+            "id": 24
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores da Ponte do Barão (Ilha do Governador) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.172341,
+                    -22.79635,
+                    0
+                ]
+            },
+            "id": 25
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores da Praia da Bica (Ilha do Governador) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.189617,
+                    -22.822065,
+                    0
+                ]
+            },
+            "id": 26
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores da Praia da Charitas ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.098357,
+                    -22.930095,
+                    0
+                ]
+            },
+            "id": 27
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores da Praia das Gaivotas (Ilha de Paquetá",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.10592401008005,
+                    -22.76356082145309,
+                    0
+                ]
+            },
+            "id": 28
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores da Rampa da Praça XV ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.16949500767815,
+                    -22.90420999448855,
+                    0
+                ]
+            },
+            "id": 29
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores da Vila Residencial da UFRJ (Ilha do Fundão) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.219489,
+                    -22.869878,
+                    0
+                ]
+            },
+            "id": 30
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores das Pitangueiras (Ilha do Governador) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.176231,
+                    -22.814652,
+                    0
+                ]
+            },
+            "id": 31
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores de Jurubaiba (Ilha de Jurubaiba) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.11064,
+                    -22.801791,
+                    0
+                ]
+            },
+            "id": 32
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores do Brejal de ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.12163,
+                    -22.666193,
+                    0
+                ]
+            },
+            "id": 33
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores do Dique II ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.29632813858065,
+                    -22.74703653707387,
+                    0
+                ]
+            },
+            "id": 34
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores do Porto da Piedade ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.061444,
+                    -22.686635,
+                    0
+                ]
+            },
+            "id": 35
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Grupo de Pescadores e Coraleiros do Riozinho ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.117558,
+                    -22.698939,
+                    0
+                ]
+            },
+            "id": 36
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores Comunitário do Rio Guapiaçu ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -42.973391,
+                    -22.675203,
+                    0
+                ]
+            },
+            "id": 37
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Associação de São Pedro ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.125968,
+                    -22.89142,
+                    0
+                ]
+            },
+            "id": 38
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Baixa dos Sapateiros (Maré) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.236437,
+                    -22.862018,
+                    0
+                ]
+            },
+            "id": 39
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Cidade Universitária (Ilha do Fundão) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.220542,
+                    -22.858998,
+                    0
+                ]
+            },
+            "id": 40
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Colônia de Ramos ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.253132,
+                    -22.837045,
+                    0
+                ]
+            },
+            "id": 41
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Comunidade do Caju (Maré) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.2133,
+                    -22.872362,
+                    0
+                ]
+            },
+            "id": 42
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Favela Nova Holanda (Maré) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.23861593528719,
+                    -22.85355117269723,
+                    0
+                ]
+            },
+            "id": 43
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Freguesia (Ilha do Governador) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.16633711604585,
+                    -22.79139921874978,
+                    0
+                ]
+            },
+            "id": 44
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Ilha da Conceição ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.115824,
+                    -22.876297,
+                    0
+                ]
+            },
+            "id": 45
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Ponte de Ferro ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.168539,
+                    -22.714101,
+                    0
+                ]
+            },
+            "id": 46
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Praia da Bandeira (Ilha do Governador) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.17634853883686,
+                    -22.81137186973232,
+                    0
+                ]
+            },
+            "id": 47
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Praia da Beira ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.06821876388113,
+                    -22.77790171392988,
+                    0
+                ]
+            },
+            "id": 48
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Praia da Boa ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.13012,
+                    -22.909042,
+                    0
+                ]
+            },
+            "id": 49
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Praia da Coroa ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.173485,
+                    -22.715882,
+                    0
+                ]
+            },
+            "id": 50
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Praia da Engenhoca (Ilha do Governador",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.169587,
+                    -22.821399,
+                    0
+                ]
+            },
+            "id": 51
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Praia da Guarda (Ilha de Paquetá) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.110154,
+                    -22.764168,
+                    0
+                ]
+            },
+            "id": 52
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Praia da Rosa (Ilha do Governador",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.189208,
+                    -22.791933,
+                    0
+                ]
+            },
+            "id": 53
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Praia de São João ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.080453,
+                    -22.791674,
+                    0
+                ]
+            },
+            "id": 54
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Praia do Anil ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.146021,
+                    -22.708088,
+                    0
+                ]
+            },
+            "id": 55
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Praia do Batalha ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.132144,
+                    -22.714844,
+                    0
+                ]
+            },
+            "id": 56
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Praia do Galeão (Ilha do Governador) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.227959,
+                    -22.82137,
+                    0
+                ]
+            },
+            "id": 57
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Praia do Remanso ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.112668,
+                    -22.692671,
+                    0
+                ]
+            },
+            "id": 58
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Praia do Zumbi (Ilha do Governador) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.17500248413718,
+                    -22.81911392410227,
+                    0
+                ]
+            },
+            "id": 59
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Prainha ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.157842,
+                    -22.709399,
+                    0
+                ]
+            },
+            "id": 60
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Rampa do Jardim Gramacho ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.275305,
+                    -22.74565,
+                    0
+                ]
+            },
+            "id": 61
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores da Ribeira (Ilha do Governador) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.168377,
+                    -22.825273,
+                    0
+                ]
+            },
+            "id": 62
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores de Barão de Iriri ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.086486,
+                    -22.677838,
+                    0
+                ]
+            },
+            "id": 63
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores de Itaóquinha ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.064336,
+                    -22.765567,
+                    0
+                ]
+            },
+            "id": 64
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores de São Lourenço ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.126479,
+                    -22.714002,
+                    0
+                ]
+            },
+            "id": 65
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores de São Roque (Ilha de Paquetá) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.110723,
+                    -22.7529,
+                    0
+                ]
+            },
+            "id": 66
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores do Boaçu ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.057302,
+                    -22.80329,
+                    0
+                ]
+            },
+            "id": 67
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores do Canal de Magé ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.04027620847876,
+                    -22.66756512142935,
+                    0
+                ]
+            },
+            "id": 68
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores do Cocotá (Ilha do Governador) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.177805,
+                    -22.801644,
+                    0
+                ]
+            },
+            "id": 69
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores do Dique I ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.29261431025373,
+                    -22.74755678679279,
+                    0
+                ]
+            },
+            "id": 70
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores do Fundão (Ilha do Fundão) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.238308,
+                    -22.839138,
+                    0
+                ]
+            },
+            "id": 71
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores do Gradin ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.08329103044414,
+                    -22.82056102630623,
+                    0
+                ]
+            },
+            "id": 72
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores do Jardim Ana Clara ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.218795,
+                    -22.707697,
+                    0
+                ]
+            },
+            "id": 73
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores do Maruim (Ilha do Governador",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.209561,
+                    -22.792818,
+                    0
+                ]
+            },
+            "id": 74
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores do Parque das Missões ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.281563,
+                    -22.803853,
+                    0
+                ]
+            },
+            "id": 75
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores do Parque União (Maré) ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.240783,
+                    -22.848219,
+                    0
+                ]
+            },
+            "id": 76
+        },
+        {
             "type": "Feature",
             "properties": {
                 "Name": "Pescadores do Quadrado da Urca ",
@@ -54,9 +1408,64 @@
                 "coordinates": [
                     -43.169239,
                     -22.952258,
-                    0.0
+                    0
                 ]
-            }
+            },
+            "id": 77
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores e Catadores de Caranguejos do Sarapuí ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.292004,
+                    -22.750391,
+                    0
+                ]
+            },
+            "id": 78
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Pescadores e Coraleiros da Praia do Limão ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.18310001990207,
+                    -22.7211724987154,
+                    0
+                ]
+            },
+            "id": 79
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "Vila dos Pescadores e Coraleiros da ",
+                "tessellate": -1,
+                "extrude": 0,
+                "visibility": -1
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -43.283664,
+                    -22.774252,
+                    0
+                ]
+            },
+            "id": 80
         }
     ]
 }
