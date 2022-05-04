@@ -13,7 +13,6 @@
     "json-loader": "^0.5.7",
     "mapbox-gl": "^1.13.2",
     "polylabel": "^1.1.0",
-    "v-mapbox": "^1.11.2",
     "vue": "^2.6.11",
     "vue-mapbox": "^0.4.1",
     "vue-router": "^3.2.0",
