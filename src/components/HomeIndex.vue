@@ -256,8 +256,9 @@ export default {
                 },
                 layout: {
                     'icon-image': 'pescadores-icon',
-                    'icon-size': 0.1    ,
-                    'icon-ignore-placement': true,
+                    'icon-size': 0.7    ,
+                    'icon-ignore-placement': false,
+                    'icon-allow-overlap': false,
                     'visibility': 'visible'
                 }
             });
@@ -272,7 +273,7 @@ export default {
                 layout: {
                     'icon-image': 'island',
                     'icon-size': 0.1    ,
-                    'icon-ignore-placement': true,
+                    'icon-ignore-placement': false,
                     'visibility': 'visible'
                 }
             });
@@ -287,7 +288,8 @@ export default {
                 layout: {
                     'icon-image': 'entidades-icon',
                     'icon-size': 0.1    ,
-                    'icon-ignore-placement': true,
+                    'icon-allow-overlap': false,
+                    'icon-ignore-placement': false,
                     'visibility': 'visible'
                 }
             });
@@ -301,6 +303,7 @@ export default {
                 },
                 layout: {
                     'icon-image': 'shipyard',
+                    'icon-allow-overlap': false,
                     'icon-size': 0.1    ,
                     'visibility': 'visible'
                 }
