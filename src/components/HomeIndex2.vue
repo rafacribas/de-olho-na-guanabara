@@ -50,7 +50,7 @@
             class="text--subtitle"
             style="font-size: 12px; color: rgba(0, 0, 0, 0.8)"
           >
-            Criado em 01/04/2022
+            Registrado em 06/05/2022 por Alexandre
           </div>
         </v-card-actions>
       </v-card>
@@ -1136,7 +1136,7 @@ export default {
       console.log("feature", feature);
       this.dialogContent = {
         photos: feature.properties.photo,
-        createdAt: feature.properties.createdAt,
+        createdAt: new Date(feature.properties.createdAt),
         impacts: feature.properties.impacts.split(";"),
         categorie: feature.properties.categories,
         elements: feature.properties.elements.split(";"),
