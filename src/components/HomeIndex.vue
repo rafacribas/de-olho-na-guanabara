@@ -111,8 +111,6 @@ import Mapbox from 'mapbox-gl'
 import axios from 'axios'
  // eslint-disable-next-line no-unused-vars
 /* eslint-disable vue/no-unused-vars */
-import oilBarrel from '../assets/oil-barrel.png'
-import oilDrop from '../assets/oil-drop.png'
 import refinariaIcon from '../assets/refinery.png'
 import pescadoresIcon from '../assets/fishing-net.png'
 import island from '../assets/island.png'
@@ -134,10 +132,6 @@ export default {
         isSatellite(){
             return this.mapStyle == this.styleSatellite ? true : false
         }
-    },
-    created() {
-    // We need to set mapbox-gl library here in order to use it in template
-        this.mapbox = Mapbox;
     },
     data(){
         return {
@@ -310,13 +304,7 @@ export default {
             });
 
             // Adiciona layer de markers
-            map.loadImage(
-                oilBarrel,
-                (error, image) => {
-                    if (error) throw error;
-                    map.addImage('oil-icon', image);
-                }
-            );
+
             map.loadImage(
                 island,
                 (error, image) => {
@@ -352,14 +340,6 @@ export default {
                 (error, image) => {
                     if (error) throw error;
                     map.addImage('shipyard', image);
-                }
-            );
-            
-            map.loadImage(
-                oilDrop,
-                (error, image) => {
-                    if (error) throw error;
-                    map.addImage('oil-drop', image);
                 }
             );
 
