@@ -108,7 +108,7 @@ export default {
                     return [
                         'Embarcações de grande porte',
                         'Rebocadores',
-                        'Embarcações e carcaçasabandonadas ou naufragadas'                      
+                        'Embarcações e carcaças abandonadas ou naufragadas'                      
                         ]                    
                 case 'Rotas de Embarcações de Grande Porte':
                     return [
