@@ -107,7 +107,7 @@ export default {
     this.mapbox = Mapbox;
     },
     async mounted(){
-        const response = await axios.get('https://guanabara-backend.herokuapp.com/location-points')
+        const response = await axios.get('https://guanabara-backend.herokuapp.com/location-points?_limit=-1')
             this.markers = response.data.map(item =>{
                 let photos;
                 if(item.photo.length)

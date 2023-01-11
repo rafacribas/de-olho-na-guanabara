@@ -244,7 +244,7 @@ export default {
                 this.file.forEach(f => {
                     formData.append("files.photo", f);
                 });
-                await axios.post("https://guanabara-backend.herokuapp.com/location-points", formData).then(res => {
+                await axios.post("https://guanabara-backend.herokuapp.com/location-points?_limit=-1", formData).then(res => {
                     console.log(res);
                     console.log(res.data);
                 });       
@@ -270,7 +270,7 @@ export default {
                     "impacts": "${this.impactosSelecionados.join(';')}"
                     }`);
                 formData.append("files.photo", this.file);
-                await axios.post("https://guanabara-backend.herokuapp.com/location-points", formData).then(res => {
+                await axios.post("https://guanabara-backend.herokuapp.com/location-points?_limit=-1", formData).then(res => {
                     console.log(res);
                     console.log(res.data);
                 });       
