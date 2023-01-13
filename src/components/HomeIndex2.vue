@@ -648,9 +648,9 @@ export default {
         elements: [],
       },
       accessToken:
-        "pk.eyJ1IjoicmFmYWNyaWJhcyIsImEiOiJjazloZ3R0aW0weWIxM2ZwOWl2bTZ5aHhrIn0.q8zXHOGQxnHffPu-T6L85A",
-      mapStyle: "mapbox://styles/rafacribas/cl1ye632t001j14ms7r26m9md",
-      styleOutdoors: "mapbox://styles/rafacribas/cl1ye632t001j14ms7r26m9md",
+        "pk.eyJ1IjoiZGVvbGhvbmFiYWlhIiwiYSI6ImNrd202Njl6ZjA4dnYycnBqcnVseGRwdGIifQ.eBIRx2mq5aazdWvHwXEc2A",
+      mapStyle: "mapbox://styles/deolhonabaia/ckz63btci000w14nn74e59vnz",
+      styleOutdoors: "mapbox://styles/deolhonabaia/ckz63btci000w14nn74e59vnz",
       styleSatellite: "mapbox://styles/mapbox/satellite-streets-v11",
       center: [-43.12725, -22.81692],
       zoom: 12,
