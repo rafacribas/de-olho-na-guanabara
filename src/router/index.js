@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { isSignedIn } from '../auth';
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -12,10 +14,22 @@ const routes = [
         component: () =>import( '@/components/HomeIndex2.vue')
     },
     {
-      path: '/app',
+    path: '/app',
     name: 'RouterView',
     component: () =>import( '@/views/RouterView.vue'),
+    beforeEnter (_, __, next){
+      if (isSignedIn()) {       // de acessar a página Home.
+        next();
+        return;
+      }
+      next('/login')
+    },
     children: [
+      {  
+        path: 'registrar',
+        name: 'Registrar Usuario',    
+        component: () => import( '@/components/RegistrarUsuario.vue'),
+      },
       {
         path: '/',
         name: 'Campo',
@@ -45,7 +59,14 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () =>import( '@/views/Login.vue')
+    component: () =>import( '@/views/Login.vue'),
+    beforeEnter (_, __, next) { // Impede usuários assinados de
+      if (!isSignedIn()) {      // acessar a página de login.
+        next();
+        return;
+      }
+      next('/app')
+    }
   },
 ]
 

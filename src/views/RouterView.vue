@@ -62,12 +62,15 @@
 
 
 <script>
+import { isSignedIn, signOut } from '../auth';
+
   export default {
    data(){
      return{
        drawer:null,
         items: [
         { title: 'Mapa Campo', icon: 'mdi-map-marker-plus-outline', link: '/app' },
+        { title: 'Registrar Usuario', icon: 'mdi-account-plus', link: '/app/registrar' },
         // { title: 'Pontos cadastrados', icon: 'mdi-map', link: '/meusPontos' },
         // { title: 'Meus Pontos', icon: 'mdi-map-search',link: '/meusPontos' },
       ] 
@@ -75,14 +78,21 @@
    },
    methods: {
      logoff() {
-       window.sessionStorage.setItem('auth', false)
-       window.location.assign('/')
+      signOut();
+      window.location.assign('/login')
+      //  window.sessionStorage.setItem('token', `false`)
+      //  window.location.assign('/')
      }
    },
    computed:{
      isLoggedin(){
-       const existsSessionAuth = window.sessionStorage.getItem('auth')
-       return existsSessionAuth == 'false'|| !existsSessionAuth ? false : true
+      if (isSignedIn()) {       // de acessar a página Home.
+        return true
+      }else{
+        return false
+      }
+      //  const existsSessionAuth = window.sessionStorage.getItem('auth')
+      //  return existsSessionAuth == 'false'|| !existsSessionAuth ? false : true
      }
    }
   }

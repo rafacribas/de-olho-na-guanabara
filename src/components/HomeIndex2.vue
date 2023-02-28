@@ -7,6 +7,7 @@
         <v-img
           class="white--text align-end rotate-img"
           height="300px"
+          width="auto"
           contain
           :lazy-src="getDialogPhoto"
           :src="getDialogPhoto"
@@ -47,7 +48,7 @@
             class="text--subtitle"
             style="font-size: 12px; color: rgba(0, 0, 0, 0.8)"
           >
-            Registrado em {{dialogContent.createdAt}} por Alexandre
+            Registrado em {{dialogContent.createdAt}}
           </div>
         </v-card-actions>
       </v-card>

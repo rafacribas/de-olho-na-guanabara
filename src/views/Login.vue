@@ -12,7 +12,7 @@
             Guanabara!
          </p>
       </div>
-      <form @submit.prevent="submitForm" class="login" method="POST">
+      <form @submit.prevent="onSubmit" class="login" method="POST">
          <div>
            <h1>Login</h1>
            <input v-model="inputEmail" type="email" placeholder="Email"  name="user">
@@ -31,36 +31,25 @@
 </template>
 
 <script>
+import { signIn } from '../auth';
+
 export default {
     data() {
         return { 
           error: false,
-          emails:['admin@guanabara.com','livia@guanabara.com','alexandre@guanabara.com'],
-          senhas:['admin123','admin'],
-            user: {
-                email: 'admin@guanabara.com',
-                password: 'admin',
-                name: 'John Doe',
-            },
-            options: {
-                isLoggingIn: true,
-                shouldStayLoggedIn: true,
-            },
             inputEmail: '',
             inputPassword: ''
         }
     },
     methods: {
-      submitForm() {
-        if (this.emails.includes(this.inputEmail) && this.senhas.includes(this.inputPassword)){ 
-          window.sessionStorage.setItem('auth', true)
-          window.location.assign('/app')
-          
+      async onSubmit(){
+        let loggedIn = await signIn(this.inputEmail, this.inputPassword);
+
+        if (loggedIn){
+          this.$router.push('/app');
         } else {
-          window.sessionStorage.setItem('auth', false)
-          this.error = true
+          this.error = true;
         }
-          
       }
     }
 }
