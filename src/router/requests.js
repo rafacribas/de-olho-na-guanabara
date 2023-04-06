@@ -1,6 +1,6 @@
-const baseURL = 'http://localhost:1337/api/';
+const baseURL = process.env.VUE_APP_BASE_URL;
 
-function getHeaders () {
+function getHeaders() {
   const token = localStorage.getItem('token');
   return {
     'Content-Type': 'application/json',
@@ -10,7 +10,7 @@ function getHeaders () {
   };
 }
 
-async function request (method, url, body) {
+async function request(method, url, body) {
   const options = {
     method,
     headers: getHeaders(),

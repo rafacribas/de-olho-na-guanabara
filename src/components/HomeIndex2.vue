@@ -7,10 +7,10 @@
         <v-img
           class="white--text align-end rotate-img"
           height="300px"
-          width="auto"
+          width="100%"
           contain
-          :lazy-src="getDialogPhoto"
-          :src="getDialogPhoto"
+          v-if="dialogContent.photos.length == 1"
+          :src="dialogContent.photos[0]"
         >
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0" align="center" justify="center">
@@ -21,6 +21,13 @@
             </v-row>
           </template>
         </v-img>
+        <v-carousel v-else cycle height="300" hide-delimiter-background>
+          <v-carousel-item
+            v-for="(slide, i) in dialogContent.photos"
+            :key="i"
+            :src="slide"
+          />
+        </v-carousel>
         <v-card-subtitle class="pb-0">
           <v-card-title>{{ dialogContent.categorie }}</v-card-title>
           <v-list dense>
@@ -442,6 +449,7 @@
 <script>
 /* eslint-disable vue/no-unused-components */
 /* eslint-disable vue/no-unused-vars */
+import request from "@/router/requests.js"
 import estaleiros from "../assets/estaleiros.geojson";
 import pescadores from "../assets/pescadores.geojson";
 import ilhas from "../assets/ilhas.geojson";
@@ -460,7 +468,6 @@ import axios from "axios";
 
 
 import refinariaIcon from "../assets/refinery.png";
-import noImage from "../assets/noimage.png"
 import pescadoresIcon from "../assets/fishing-net.png";
 import island from "../assets/island.png";
 import entidadesIcon from "../assets/hands.png";
@@ -479,22 +486,15 @@ export default {
     MglPopup,
     MglGeojsonLayer,
   },
-  computed: {
-    getDialogPhoto() {
-      if (this.dialogContent.photos == "[]")
-        return this.noImage;
-      return this.dialogContent.photos;
-    },
+  computed: {    
     isSatellite() {
       return this.mapStyle == this.styleSatellite ? true : false;
     },
   },
   data() {
     return {
-      noImage: noImage,
+      noImage: process.env.VUE_APP_NO_IMAGE_URL,
       asyncActions: null,
-      painel1: [0,1,2,3,4,5,6],
-      testeRatividadeArea: [],
       testeReativBoia: [],
       reativPlacas: [],
       reativDragagem: [],
@@ -646,11 +646,11 @@ export default {
       opentestekey: false,
       opentestecontent: "",
       dialogContent: {
+        photos: [],
         elements: [],
       },
-      accessToken:
-        "pk.eyJ1IjoiZGVvbGhvbmFiYWlhIiwiYSI6ImNrd202Njl6ZjA4dnYycnBqcnVseGRwdGIifQ.eBIRx2mq5aazdWvHwXEc2A",
-      mapStyle: "mapbox://styles/deolhonabaia/ckz63btci000w14nn74e59vnz",
+      accessToken:process.env.VUE_APP_ACCESS_TOKEN,
+      mapStyle:process.env.VUE_APP_MAP_STYLE_URL,
       styleOutdoors: "mapbox://styles/deolhonabaia/ckz63btci000w14nn74e59vnz",
       styleSatellite: "mapbox://styles/mapbox/satellite-streets-v11",
       center: [-43.12725, -22.81692],
@@ -712,12 +712,6 @@ export default {
       this.reativEmpresaPetroleo = featuresEstrutura.filter((feat) => feat.properties.elements == 'Empresas de derivados do Petróleo')
       this.reativObra = featuresEstrutura.filter((feat) => feat.properties.elements == 'Frente de obras/manutenção')
     },
-    tirarFeature(){
-          map.setFeatureState(
-            { source: "rotas", id: 3 },
-            { hover: false }
-          );
-    },
     mostrarFeature() {
       console.log(`mostrar feature`, map)  
       map.setFeatureState(
@@ -744,8 +738,25 @@ export default {
           speed: 1
         }) 
       }
+      //  TODO RESOLVER IMG
+      let photox = []
+      let featurePhotos = feature.properties.photo.replace(/[\[\]"]/g, '');   
+      
+      if (featurePhotos.includes(',')){
+        featurePhotos.split(',').forEach(element => {
+          photox.push(process.env.VUE_APP_STRAPI_URL+element)
+        });
+ 
+      }else{
+        if (featurePhotos == 'noImage'){
+          photox[0] = this.noImage
+        }else{
+          photox[0] = process.env.VUE_APP_STRAPI_URL+featurePhotos;
+        }
+      }
+
       this.dialogContent = {
-        photos: feature.properties.photo,
+        photos: photox,
         createdAt: new Date(feature.properties.createdAt).toLocaleDateString('pt-BR', {year: 'numeric', month: '2-digit', day: '2-digit'}),
         impacts: feature.properties.impacts.split(";"),
         categorie: feature.properties.categories,
@@ -1779,12 +1790,9 @@ export default {
     },
   },
   async mounted() {
-    const response = await axios.get(
-      "https://guanabara-backend.herokuapp.com/location-points?_limit=-1"
-    );
-
-    this.responseData = response.data.map((item) => {
-      if (item.photo[0]) {
+    let resposta = await request('GET', 'denuncias?populate=*');
+    this.responseData = resposta.data.map((item) => {
+      if (item.photo) {
         if (item.photo.length > 1) {
           let photos = new Array();
           item.photo.forEach((element) => {
@@ -1792,11 +1800,14 @@ export default {
           });
           item.photo = photos;
         } else {
-          item.photo = item.photo[0].url;
+          item.photo[0] = item.photo[0].url;
         }
+      }else{
+        item.photo = []
+        item.photo[0] = 'noImage'
       }
       return item;
-    });
+    })
 
     this.shouldResponseLoad.fetch = true;
 
@@ -1896,8 +1907,8 @@ export default {
 }
 
 .rotate-img{
-   writing-mode: vertical-rl;
-   margin: 50px 0 45px 0px;
+  writing-mode: vertical-rl;
+  margin: 50px 0 45px 0px;
   transform: rotate(90deg);
   white-space: nowrap;
   display: inline-block;
